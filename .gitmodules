@@ -1,0 +1,3 @@
+[submodule "RabbitEngine/vendor/spdlog"]
+	path = RabbitEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "rbpch.h"
 #include "Rabbit/Core.h"
 
 namespace Rabbit {

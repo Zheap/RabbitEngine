@@ -1,3 +1,6 @@
 [submodule "RabbitEngine/vendor/spdlog"]
 	path = RabbitEngine/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "RabbitEngine/vendor/GLFW"]
+	path = RabbitEngine/vendor/GLFW
+	url = https://github.com/Zheap/glfw

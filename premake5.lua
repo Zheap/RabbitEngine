@@ -15,6 +15,12 @@ workspace "RabbitEngine"		-- 设置工作区目录
 -- 拼接目录类似：Debug-windows-x86_64
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "RabbitEngine/vendor/GLFW/include"
+
+include "RabbitEngine/vendor/GLFW"
+
 
 -- 配置一个动态库项目：RabbitEngine
 project "RabbitEngine"
@@ -39,7 +45,14 @@ project "RabbitEngine"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"				-- 设置针对Windows平台的过滤器

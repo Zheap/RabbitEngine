@@ -1,4 +1,6 @@
+#include "rbpch.h"
 #include "Log.h"
+
 
 namespace Rabbit {
 

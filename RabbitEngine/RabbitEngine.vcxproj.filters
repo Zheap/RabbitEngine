@@ -4,6 +4,9 @@
     <Filter Include="Rabbit">
       <UniqueIdentifier>{39BD38CE-255F-63A4-0E1A-77F8FA5AEAF4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rabbit\Events">
+      <UniqueIdentifier>{FD2E809F-69EF-FBD5-322A-45539EA940B2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Rabbit.h" />
@@ -16,9 +19,22 @@
     <ClInclude Include="src\Rabbit\EntryPoint.h">
       <Filter>Rabbit</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rabbit\Events\ApplicationEvent.h">
+      <Filter>Rabbit\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Events\Event.h">
+      <Filter>Rabbit\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Events\KeyEvent.h">
+      <Filter>Rabbit\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Events\MouseEvent.h">
+      <Filter>Rabbit\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Rabbit\Log.h">
       <Filter>Rabbit</Filter>
     </ClInclude>
+    <ClInclude Include="src\rbpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Rabbit\Application.cpp">
@@ -27,5 +43,6 @@
     <ClCompile Include="src\Rabbit\Log.cpp">
       <Filter>Rabbit</Filter>
     </ClCompile>
+    <ClCompile Include="src\rbpch.cpp" />
   </ItemGroup>
 </Project>

@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "Rabbit/Log.h"
 
 #ifdef RB_PLATFORM_WINDOWS
     #include <Windows.h>

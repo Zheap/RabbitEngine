@@ -57,7 +57,8 @@ project "RabbitEngine"
 
 	filter "system:windows"				-- 设置针对Windows平台的过滤器
 		cppdialect "C++17"				-- 使用C++ 17标准
-		staticruntime "On"				-- 多线程调试打开
+		staticruntime "Off"				-- 多线程调试打开
+		runtime "Debug"
 		systemversion "latest"			-- 使用最新版本的系统sdk 比如Windows 10.0
 
 		defines							-- 添加Windows平台上的预处理定义

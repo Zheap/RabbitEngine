@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "Rabbit/Log.h"
 
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 namespace Rabbit
 {
@@ -25,6 +25,9 @@ namespace Rabbit
             glClearColor(1, 0, 1, 1);
             glClear(GL_COLOR_BUFFER_BIT);
             m_Window->OnUpdate();
+
+            for (Layer* layer : m_LayerStack)
+                layer->OnUpdate();
         }
     }
 
@@ -32,8 +35,25 @@ namespace Rabbit
     {
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
-        RB_CORE_INFO("{0}", e);
+
+        for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
+        {
+            (*--it)->OnEvent(e);
+            if (e.Handled)
+                break;
+        }
     }
+
+    void Application::PushLayer(Layer* layer)
+    {
+        m_LayerStack.PushLayer(layer);
+    }
+
+    void Application::PushOverLayer(Layer* layer)
+    {
+        m_LayerStack.PushOverLayer(layer);
+    }
+
     bool Application::OnWindowClose(WindowCloseEvent& e)
     {
         m_Running = false;

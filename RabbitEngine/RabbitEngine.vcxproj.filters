@@ -40,6 +40,12 @@
     <ClInclude Include="src\Rabbit\Events\MouseEvent.h">
       <Filter>Rabbit\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rabbit\Layer.h">
+      <Filter>Rabbit</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\LayerStack.h">
+      <Filter>Rabbit</Filter>
+    </ClInclude>
     <ClInclude Include="src\Rabbit\Log.h">
       <Filter>Rabbit</Filter>
     </ClInclude>
@@ -53,6 +59,12 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Rabbit\Application.cpp">
+      <Filter>Rabbit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Layer.cpp">
+      <Filter>Rabbit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\LayerStack.cpp">
       <Filter>Rabbit</Filter>
     </ClCompile>
     <ClCompile Include="src\Rabbit\Log.cpp">

@@ -18,8 +18,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "RabbitEngine/vendor/GLFW/include"
+IncludeDir["Glad"] = "RabbitEngine/vendor/Glad/include"
 
 include "RabbitEngine/vendor/GLFW"
+include "RabbitEngine/vendor/Glad"
 
 
 -- 配置一个动态库项目：RabbitEngine
@@ -46,12 +48,14 @@ project "RabbitEngine"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -64,7 +68,8 @@ project "RabbitEngine"
 		defines							-- 添加Windows平台上的预处理定义
 		{
 			"RB_PLATFORM_WINDOWS",
-			"RB_BUILD_DLL"
+			"RB_BUILD_DLL",
+		    "GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands				-- 编译后处理命令
@@ -76,14 +81,17 @@ project "RabbitEngine"
 
 	filter "configurations:Debug"		-- 配置Debug的过滤器
 		defines "RB_DEBUG"				-- 添加Debug的预编译定义
+		buildoptions "/MDd"
 		symbols "On"					-- 设置此宏有效
 		
 	filter "configurations:Release"
 		defines "RB_RELEASE"
+		buildoptions "/MD"
 		symbols "On"
 		
 	filter "configurations:Dist"
 		defines "RB_DIST"
+		buildoptions "/MD"
 		symbols "On"
 		
 project "Sandbox"
@@ -125,12 +133,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "RB_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 		
 	filter "configurations:Release"
 		defines "RB_RELEASE"
+		buildoptions "/MD"
 		symbols "On"
 		
 	filter "configurations:Dist"
 		defines "RB_DIST"
+		buildoptions "/MD"
 		symbols "On"

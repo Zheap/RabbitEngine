@@ -15,7 +15,7 @@ namespace Rabbit {
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyReleased,
+		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
@@ -62,9 +62,9 @@ namespace Rabbit {
 	{
 		template<typename T>
 		using EventFn = std::function<bool(T&)>;
+
 	public:
-		EventDispatcher(Event& event)
-			: m_Event(event) {}
+		EventDispatcher(Event& e) : m_Event(e) {}
 
 		template<typename T>
 		bool Dispatch(EventFn<T> func)
@@ -76,6 +76,7 @@ namespace Rabbit {
 			}
 			return false;
 		}
+
 
 	private:
 		Event& m_Event;

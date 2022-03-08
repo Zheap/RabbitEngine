@@ -19,9 +19,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "RabbitEngine/vendor/GLFW/include"
 IncludeDir["Glad"] = "RabbitEngine/vendor/Glad/include"
+IncludeDir["ImGui"] = "RabbitEngine/vendor/imgui"
 
 include "RabbitEngine/vendor/GLFW"
 include "RabbitEngine/vendor/Glad"
+include "RabbitEngine/vendor/imgui"
 
 
 -- 配置一个动态库项目：RabbitEngine
@@ -49,13 +51,15 @@ project "RabbitEngine"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
@@ -69,7 +73,8 @@ project "RabbitEngine"
 		{
 			"RB_PLATFORM_WINDOWS",
 			"RB_BUILD_DLL",
-		    "GLFW_INCLUDE_NONE"
+		    "GLFW_INCLUDE_NONE",
+			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM"
 		}
 
 		postbuildcommands				-- 编译后处理命令

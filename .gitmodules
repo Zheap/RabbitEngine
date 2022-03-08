@@ -4,3 +4,6 @@
 [submodule "RabbitEngine/vendor/GLFW"]
 	path = RabbitEngine/vendor/GLFW
 	url = https://github.com/Zheap/glfw
+[submodule "RabbitEngine/vendor/imgui"]
+	path = RabbitEngine/vendor/imgui
+	url = https://github.com/Zheap/imgui

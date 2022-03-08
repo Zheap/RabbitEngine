@@ -4,6 +4,9 @@
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform\OpenGL">
+      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
@@ -13,8 +16,14 @@
     <Filter Include="Rabbit\Events">
       <UniqueIdentifier>{FD2E809F-69EF-FBD5-322A-45539EA940B2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Rabbit\ImGui">
+      <UniqueIdentifier>{2379D2ED-0FDC-6192-B861-9A48A4A32D15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
+      <Filter>Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
@@ -40,6 +49,9 @@
     <ClInclude Include="src\Rabbit\Events\MouseEvent.h">
       <Filter>Rabbit\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rabbit\ImGui\ImGuiLayer.h">
+      <Filter>Rabbit\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\Rabbit\Layer.h">
       <Filter>Rabbit</Filter>
     </ClInclude>
@@ -55,11 +67,17 @@
     <ClInclude Include="src\rbpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
+      <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Rabbit\Application.cpp">
       <Filter>Rabbit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\ImGui\ImGuiLayer.cpp">
+      <Filter>Rabbit\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Rabbit\Layer.cpp">
       <Filter>Rabbit</Filter>

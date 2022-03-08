@@ -19,7 +19,7 @@ namespace Rabbit {
         m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer);
     }
 
-    void LayerStack::PushOverLayer(Layer* overlay)
+    void LayerStack::PushOverLay(Layer* overlay)
     {
         m_Layers.emplace_back(overlay);
     }
@@ -34,9 +34,9 @@ namespace Rabbit {
         }
     }
 
-    void LayerStack::PopOverLayer(Layer* layer)
+    void LayerStack::PopOverLay(Layer* overlay)
     {
-        auto it = std::find(m_Layers.begin(), m_Layers.end(), layer);
+        auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
         if (it != m_Layers.end())
             m_Layers.erase(it);
     }

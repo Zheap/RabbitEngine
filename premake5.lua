@@ -31,6 +31,7 @@ project "RabbitEngine"
 	location "RabbitEngine"		-- 项目根目录
 	kind "SharedLib"			-- 项目类型
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")		-- 生成的目标文件夹 bin/Debug-windows-x86_64/RabbitEngine, prj是project的缩写
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")		-- 中间临时文件生成目录
@@ -65,8 +66,6 @@ project "RabbitEngine"
 
 	filter "system:windows"				-- 设置针对Windows平台的过滤器
 		cppdialect "C++17"				-- 使用C++ 17标准
-		staticruntime "Off"				-- 多线程调试打开
-		runtime "Debug"
 		systemversion "latest"			-- 使用最新版本的系统sdk 比如Windows 10.0
 
 		defines							-- 添加Windows平台上的预处理定义
@@ -86,23 +85,24 @@ project "RabbitEngine"
 
 	filter "configurations:Debug"		-- 配置Debug的过滤器
 		defines "RB_DEBUG"				-- 添加Debug的预编译定义
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"					-- 设置此宏有效
 		
 	filter "configurations:Release"
 		defines "RB_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		symbols "On"
 		
 	filter "configurations:Dist"
 		defines "RB_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		symbols "On"
 		
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -127,7 +127,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -138,15 +137,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "RB_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 		
 	filter "configurations:Release"
 		defines "RB_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		symbols "On"
 		
 	filter "configurations:Dist"
 		defines "RB_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		symbols "On"

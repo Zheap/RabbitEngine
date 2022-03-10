@@ -10,12 +10,19 @@ public:
 
     void OnUpdate() override
     {
-        RB_INFO("ExampleLayer::Update");
+        if (Rabbit::Input::IsKeyPressed(RB_KEY_TAB))
+            RB_TRACE("Tab Key is pressed!(poll)");
     }
 
     void OnEvent(Rabbit::Event& event) override
     {
-        RB_TRACE("{0}", event);
+        if (event.GetEventType() == Rabbit::EventType::KeyPressed)
+        {
+            Rabbit::KeyPressedEvent& e = (Rabbit::KeyPressedEvent&)event;
+            if (e.GetKeyCode() == RB_KEY_TAB)
+                RB_TRACE("TAB Key is pressed!(event)");
+            RB_TRACE("{0}", (char)e.GetKeyCode());
+        }
     }
 };
 

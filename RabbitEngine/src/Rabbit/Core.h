@@ -10,6 +10,10 @@
     #error Rabbit only support windows
 #endif
 
+#ifdef RB_DEBUG
+#define RB_ENABLE_ASSERTS
+#endif
+
 #ifdef RB_ENABLE_ASSERTS
     #define RB_ASSERT(x, ...) { if(!x) { RB_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
     #define RB_CORE_ASSERT(x, ...) { if(!x) { RB_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }

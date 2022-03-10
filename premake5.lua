@@ -21,9 +21,11 @@ IncludeDir["GLFW"] = "RabbitEngine/vendor/GLFW/include"
 IncludeDir["Glad"] = "RabbitEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "RabbitEngine/vendor/imgui"
 
-include "RabbitEngine/vendor/GLFW"
-include "RabbitEngine/vendor/Glad"
-include "RabbitEngine/vendor/imgui"
+group "Dependencies"
+	include "RabbitEngine/vendor/GLFW"
+	include "RabbitEngine/vendor/Glad"
+	include "RabbitEngine/vendor/imgui"
+group ""
 
 
 -- 配置一个动态库项目：RabbitEngine
@@ -80,7 +82,8 @@ project "RabbitEngine"
 		{
 			-- 复制一份dll到Sandbox目录下   {COPY}命令
 			-- %{cfg.buildtarget.relpath} = "bin/Debug-windows-x86_64/RabbitEngine/RabbitEngine.dll"
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			-- ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 	filter "configurations:Debug"		-- 配置Debug的过滤器

@@ -1,6 +1,7 @@
 #include "rbpch.h"
 #include "Application.h"
 #include "Rabbit/Log.h"
+#include "Input.h"
 
 #include <glad/glad.h>
 
@@ -38,6 +39,9 @@ namespace Rabbit
             */
             for (Layer* layer : m_LayerStack)
                 layer->OnUpdate();
+
+            auto[x, y] = Input::GetMousePosition();
+            RB_CORE_TRACE("{0}, {1}", x, y);
 
             m_Window->OnUpdate();
         }

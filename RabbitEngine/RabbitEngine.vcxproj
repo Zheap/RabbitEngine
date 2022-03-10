@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Rabbit.h" />
     <ClInclude Include="src\Rabbit\Application.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="src\Rabbit\Events\KeyEvent.h" />
     <ClInclude Include="src\Rabbit\Events\MouseEvent.h" />
     <ClInclude Include="src\Rabbit\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Rabbit\Input.h" />
     <ClInclude Include="src\Rabbit\Layer.h" />
     <ClInclude Include="src\Rabbit\LayerStack.h" />
     <ClInclude Include="src\Rabbit\Log.h" />
@@ -160,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Rabbit\Application.cpp" />
     <ClCompile Include="src\Rabbit\ImGui\ImGuiLayer.cpp" />

@@ -7,3 +7,6 @@
 [submodule "RabbitEngine/vendor/imgui"]
 	path = RabbitEngine/vendor/imgui
 	url = https://github.com/Zheap/imgui
+[submodule "RabbitEngine/vendor/glm"]
+	path = RabbitEngine/vendor/glm
+	url = https://github.com/g-truc/glm

@@ -4,8 +4,9 @@
 
 #include "Window.h"
 #include "Rabbit/LayerStack.h"
-#include "Events/Event.h"
-#include "Events/ApplicationEvent.h"
+#include "Rabbit/Events/Event.h"
+#include "Rabbit/Events/ApplicationEvent.h"
+#include "Rabbit/ImGui/ImGuiLayer.h"
 
 namespace Rabbit {
 
@@ -30,6 +31,7 @@ namespace Rabbit {
         bool OnWindowClose(WindowCloseEvent& e);
 
         std::unique_ptr<Window> m_Window;
+        ImGuiLayer* m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
 

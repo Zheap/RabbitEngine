@@ -79,7 +79,6 @@ project "RabbitEngine"
 			"RB_PLATFORM_WINDOWS",
 			"RB_BUILD_DLL",
 		    "GLFW_INCLUDE_NONE",
-			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM"
 		}
 
 		postbuildcommands				-- ±‡“Î∫Û¥¶¿Ì√¸¡Ó
@@ -124,6 +123,7 @@ project "Sandbox"
 	{
 		"RabbitEngine/vendor/spdlog/include",
 		"RabbitEngine/src",
+		"RabbitEngine/vendor",
 		"%{IncludeDir.glm}"
 	}
 

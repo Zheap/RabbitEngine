@@ -1,5 +1,6 @@
 #include <Rabbit.h>
 
+#include "imgui/imgui.h"
 class ExampleLayer : public Rabbit::Layer
 {
 public:
@@ -12,6 +13,13 @@ public:
     {
         if (Rabbit::Input::IsKeyPressed(RB_KEY_TAB))
             RB_TRACE("Tab Key is pressed!(poll)");
+    }
+
+    void OnImGuiRender() override
+    {
+        ImGui::Begin("Test");
+        ImGui::Text("Hello Rabbit!");
+        ImGui::End();
     }
 
     void OnEvent(Rabbit::Event& event) override
@@ -32,7 +40,7 @@ public:
     Sandbox()
     {
         PushLayer(new ExampleLayer());
-        PushOverLay(new Rabbit::ImGuiLayer());
+
     }
     ~Sandbox() {}
 };

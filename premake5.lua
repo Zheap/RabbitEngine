@@ -32,9 +32,10 @@ group ""
 -- 配置一个动态库项目：RabbitEngine
 project "RabbitEngine"
 	location "RabbitEngine"		-- 项目根目录
-	kind "SharedLib"			-- 项目类型
+	kind "StaticLib"			-- 项目类型
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"				-- 使用C++ 17标准
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")		-- 生成的目标文件夹 bin/Debug-windows-x86_64/RabbitEngine, prj是project的缩写
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")		-- 中间临时文件生成目录
@@ -49,6 +50,11 @@ project "RabbitEngine"
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 -- 当前项目附加的包含库目录
@@ -71,7 +77,6 @@ project "RabbitEngine"
 	}
 
 	filter "system:windows"				-- 设置针对Windows平台的过滤器
-		cppdialect "C++17"				-- 使用C++ 17标准
 		systemversion "latest"			-- 使用最新版本的系统sdk 比如Windows 10.0
 
 		defines							-- 添加Windows平台上的预处理定义
@@ -81,34 +86,27 @@ project "RabbitEngine"
 		    "GLFW_INCLUDE_NONE",
 		}
 
-		postbuildcommands				-- 编译后处理命令
-		{
-			-- 复制一份dll到Sandbox目录下   {COPY}命令
-			-- %{cfg.buildtarget.relpath} = "bin/Debug-windows-x86_64/RabbitEngine/RabbitEngine.dll"
-			-- ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-		}
-
 	filter "configurations:Debug"		-- 配置Debug的过滤器
 		defines "RB_DEBUG"				-- 添加Debug的预编译定义
 		runtime "Debug"
-		symbols "On"					-- 设置此宏有效
+		symbols "on"					-- 设置此宏有效
 		
 	filter "configurations:Release"
 		defines "RB_RELEASE"
 		runtime "Release"
-		symbols "On"
+		symbols "on"
 		
 	filter "configurations:Dist"
 		defines "RB_DIST"
 		runtime "Release"
-		symbols "On"
+		symbols "on"
 		
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -134,7 +132,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
 		defines
@@ -142,18 +139,17 @@ project "Sandbox"
 			"RB_PLATFORM_WINDOWS"
 		}
 
-
 	filter "configurations:Debug"
 		defines "RB_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 		
 	filter "configurations:Release"
 		defines "RB_RELEASE"
 		runtime "Release"
-		symbols "On"
+		symbols "on"
 		
 	filter "configurations:Dist"
 		defines "RB_DIST"
 		runtime "Release"
-		symbols "On"
+		symbols "on"

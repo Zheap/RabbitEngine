@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef RB_PLATFORM_WINDOWS
+#if HZ_DYNAMIC_LINK
     #ifdef RB_BUILD_DLL
         #define RABBIT_API __declspec(dllexport)
     #else
         #define RABBIT_API __declspec(dllimport)
     #endif
+#else
+    #define RABBIT_API
+#endif
 #else
     #error Rabbit only support windows
 #endif

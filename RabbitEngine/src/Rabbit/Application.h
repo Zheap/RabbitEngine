@@ -7,6 +7,7 @@
 #include "Rabbit/Events/Event.h"
 #include "Rabbit/Events/ApplicationEvent.h"
 #include "Rabbit/ImGui/ImGuiLayer.h"
+#include "Rabbit/Renderer/Shader.h"
 
 namespace Rabbit {
 
@@ -36,6 +37,7 @@ namespace Rabbit {
         LayerStack m_LayerStack;
 
         unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+        std::unique_ptr<Shader> m_Shader;
 
     private:
         static Application* s_Instance;

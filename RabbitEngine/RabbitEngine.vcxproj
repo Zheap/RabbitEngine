@@ -151,6 +151,7 @@
     <ClInclude Include="src\Rabbit\Log.h" />
     <ClInclude Include="src\Rabbit\MouseButtonCodes.h" />
     <ClInclude Include="src\Rabbit\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Rabbit\Renderer\Shader.h" />
     <ClInclude Include="src\Rabbit\Window.h" />
     <ClInclude Include="src\rbpch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -579,6 +580,7 @@
     <ClCompile Include="src\Rabbit\Layer.cpp" />
     <ClCompile Include="src\Rabbit\LayerStack.cpp" />
     <ClCompile Include="src\Rabbit\Log.cpp" />
+    <ClCompile Include="src\Rabbit\Renderer\Shader.cpp" />
     <ClCompile Include="src\rbpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

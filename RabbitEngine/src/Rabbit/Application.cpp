@@ -11,25 +11,6 @@ namespace Rabbit
 
     Application* Application::s_Instance = nullptr;
 
-    static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
-    {
-        switch (type)
-        {
-            case Rabbit::ShaderDataType::None:      return GL_FLOAT;
-            case Rabbit::ShaderDataType::Float:     return GL_FLOAT;
-            case Rabbit::ShaderDataType::Float2:    return GL_FLOAT;
-            case Rabbit::ShaderDataType::Float3:    return GL_FLOAT;
-            case Rabbit::ShaderDataType::Float4:    return GL_FLOAT;
-            case Rabbit::ShaderDataType::Mat3:      return GL_FLOAT;
-            case Rabbit::ShaderDataType::Mat4:      return GL_FLOAT;
-            case Rabbit::ShaderDataType::Int:       return GL_INT;
-            case Rabbit::ShaderDataType::Int2:      return GL_INT;
-            case Rabbit::ShaderDataType::Int3:      return GL_INT;
-            case Rabbit::ShaderDataType::Int4:      return GL_INT;
-            case Rabbit::ShaderDataType::Bool:      return GL_BOOL;
-        }
-    }
-
     Application::Application()
     {
         RB_CORE_ASSERT(!s_Instance, "Application already exists!")
@@ -41,9 +22,7 @@ namespace Rabbit
         m_ImGuiLayer = new ImGuiLayer();
         PushOverLay(m_ImGuiLayer);
 
-        // VertexArray
-        glGenVertexArrays(1, &m_VertexArray);
-        glBindVertexArray(m_VertexArray);
+        m_VertexArray.reset(VertexArray::Create());
 
         float vertices[3 * 7] = {
             -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -52,34 +31,42 @@ namespace Rabbit
         };
 
         // VertexBuffer
-        m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-
-        {
-            BufferLayout layout = {   
-                { ShaderDataType::Float3, "a_Position" },
-                { ShaderDataType::Float4, "a_Color"    }
-            };
-
-            m_VertexBuffer->SetLayout(layout);
-        }
-
-        uint32_t index = 0;
-        const auto& layout = m_VertexBuffer->GetLayout();
-        for (const auto& element : layout)
-        {
-            glEnableVertexAttribArray(index);
-            glVertexAttribPointer(index, 
-                element.GetComponentCount(), 
-                ShaderDataTypeToOpenGLBaseType(element.Type),
-                element.Normalized ? GL_TRUE : GL_FALSE, 
-                layout.GetStride(), 
-                (const void*)element.Offset);
-            index++;
-        }
+        std::shared_ptr<VertexBuffer> vertexBuffer;
+        vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+        BufferLayout layout = {
+            { ShaderDataType::Float3, "a_Position" },
+            { ShaderDataType::Float4, "a_Color"    }
+        };
+        vertexBuffer->SetLayout(layout);
+        m_VertexArray->AddVertexBuffer(vertexBuffer);
 
         // IndexBuffer
         uint32_t indices[3] = { 0, 1, 2 };
-        m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+        std::shared_ptr<IndexBuffer> indexBuffer;
+        indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+        m_VertexArray->SetIndexBuffer(indexBuffer);
+
+
+        float squareVertices[3 * 4] = {
+            -0.75f, -0.75f, 0.0f,
+             0.75f, -0.75f, 0.0f,
+             0.75f,  0.75f, 0.0f,
+            -0.75f,  0.75f, 0.0f
+        };
+        m_SquareVA.reset(VertexArray::Create());
+        std::shared_ptr<VertexBuffer> squareVB;
+        squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+
+        squareVB->SetLayout({
+            { ShaderDataType::Float3, "a_Position" }
+        });
+        m_SquareVA->AddVertexBuffer(squareVB);
+
+        uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0};
+        std::shared_ptr<IndexBuffer> squareIB;
+        squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+        m_SquareVA->SetIndexBuffer(squareIB);
+
 
         std::string vertexSrc = R"(
             #version 330 core
@@ -115,6 +102,35 @@ namespace Rabbit
 
         m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
 
+        std::string BlueShaderVertexSrc = R"(
+            #version 330 core
+            
+            layout(location = 0) in vec3 a_Position;
+
+            out vec3 v_Position;
+
+            void main()
+            {
+                v_Position = a_Position;
+                gl_Position = vec4(a_Position, 1.0);
+            }
+        )";
+
+        std::string BlueShaderFragmentSrc = R"(
+            #version 330 core
+            
+            layout(location = 0) out vec4 color;
+
+            in vec3 v_Position;
+
+            void main()
+            {
+                color = vec4(0.2, 0.3, 0.8, 1.0);
+            }
+        )";
+
+        m_BlueShader.reset(new Shader(BlueShaderVertexSrc, BlueShaderFragmentSrc));
+
     }
 
     Application::~Application()
@@ -128,9 +144,13 @@ namespace Rabbit
             glClearColor(0.1, 0.1, 0.1, 1);
             glClear(GL_COLOR_BUFFER_BIT);
 
+            m_BlueShader->Bind();
+            m_SquareVA->Bind();
+            glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+
             m_Shader->Bind();
-            glBindVertexArray(m_VertexArray);
-            glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+            m_VertexArray->Bind();
+            glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
             /*
             * 这里layer->OnUpdate()必须要放在m_window->OnUpdate()之前，因为m_window->OnUpdate()里面会执行glfwSwapBuffers(),

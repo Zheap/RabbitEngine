@@ -2,8 +2,7 @@
 #include "Application.h"
 #include "Rabbit/Log.h"
 #include "Input.h"
-
-#include <glad/glad.h>
+#include "Rabbit/Renderer/Renderer.h"
 
 namespace Rabbit
 {
@@ -133,25 +132,22 @@ namespace Rabbit
 
     }
 
-    Application::~Application()
-    {
-    }
-
     void Application::Run()
     {
         while (m_Running)
         {
-            glClearColor(0.1, 0.1, 0.1, 1);
-            glClear(GL_COLOR_BUFFER_BIT);
+            RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+            RenderCommand::Clear();
+
+            Renderer::BeginScene();
 
             m_BlueShader->Bind();
-            m_SquareVA->Bind();
-            glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+            Renderer::Submit(m_SquareVA);
 
             m_Shader->Bind();
-            m_VertexArray->Bind();
-            glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+            Renderer::Submit(m_VertexArray);
 
+            Renderer::EndScene();
             /*
             * 这里layer->OnUpdate()必须要放在m_window->OnUpdate()之前，因为m_window->OnUpdate()里面会执行glfwSwapBuffers(),
             * 把当前render buffer内存中的数据拷贝到屏幕上；如果layer->OnUpdate()放在m_window->OnUpdate()后面的话，虽然会把layer层的数据写入到buffer内存中，
@@ -186,13 +182,11 @@ namespace Rabbit
     void Application::PushLayer(Layer* layer)
     {
         m_LayerStack.PushLayer(layer);
-        layer->OnAttach();
     }
 
     void Application::PushOverLay(Layer* layer)
     {
         m_LayerStack.PushOverLay(layer);
-        layer->OnAttach();
     }
 
     bool Application::OnWindowClose(WindowCloseEvent& e)

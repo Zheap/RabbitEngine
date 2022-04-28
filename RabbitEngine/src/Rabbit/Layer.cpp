@@ -8,7 +8,4 @@ namespace Rabbit {
     {
     }
 
-    Layer::~Layer()
-    {
-    }
 }

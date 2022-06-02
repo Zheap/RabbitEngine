@@ -10,6 +10,7 @@
 #include "Rabbit/Renderer/Shader.h"
 #include "Rabbit/Renderer/Buffer.h"
 #include "Rabbit/Renderer/VertexArray.h"
+#include "Rabbit/Renderer/OrthographicCamera.h"
 
 namespace Rabbit {
 
@@ -43,6 +44,8 @@ namespace Rabbit {
 
         std::shared_ptr<Shader> m_BlueShader;
         std::shared_ptr<VertexArray> m_SquareVA;
+
+        OrthographicCamera m_Camera;
 
     private:
         static Application* s_Instance;

@@ -7,14 +7,10 @@
 #include "Rabbit/Events/Event.h"
 #include "Rabbit/Events/ApplicationEvent.h"
 #include "Rabbit/ImGui/ImGuiLayer.h"
-#include "Rabbit/Renderer/Shader.h"
-#include "Rabbit/Renderer/Buffer.h"
-#include "Rabbit/Renderer/VertexArray.h"
-#include "Rabbit/Renderer/OrthographicCamera.h"
 
 namespace Rabbit {
 
-    class RABBIT_API Application
+    class Application
     {
     public:
         Application();
@@ -38,14 +34,6 @@ namespace Rabbit {
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
-
-        std::shared_ptr<Shader> m_Shader;
-        std::shared_ptr<VertexArray> m_VertexArray;
-
-        std::shared_ptr<Shader> m_BlueShader;
-        std::shared_ptr<VertexArray> m_SquareVA;
-
-        OrthographicCamera m_Camera;
 
     private:
         static Application* s_Instance;

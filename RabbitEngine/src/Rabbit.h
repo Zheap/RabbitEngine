@@ -12,6 +12,17 @@
 
 #include "Rabbit/ImGui/ImGuiLayer.h"
 
+// -------------Renderer------------------
+#include "Rabbit/Renderer/Renderer.h"
+#include "Rabbit/Renderer/RenderCommand.h"
+
+#include "Rabbit/Renderer/Buffer.h"
+#include "Rabbit/Renderer/Shader.h"
+#include "Rabbit/Renderer/VertexArray.h"
+
+#include "Rabbit/Renderer/OrthographicCamera.h"
+// ---------------------------------------
+
 // -------------Entry Point---------------
 #include "Rabbit/EntryPoint.h"
 // ---------------------------------------

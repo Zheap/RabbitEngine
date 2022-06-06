@@ -6,6 +6,8 @@
 #include "Rabbit/Log.h"
 #include "Rabbit/Layer.h"
 
+#include "Rabbit/Core/Timestep.h"
+
 #include "Rabbit/Input.h"
 #include "Rabbit/KeyCodes.h"
 #include "Rabbit/MouseButtonCodes.h"

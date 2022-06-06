@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Rabbit/Core.h"
+#include "Rabbit/Core/Timestep.h"
 #include "Rabbit/Events/Event.h"
 
 namespace Rabbit {
@@ -13,7 +14,7 @@ namespace Rabbit {
 
         virtual void OnAttach() {}
         virtual void OnDetach() {}
-        virtual void OnUpdate() {}
+        virtual void OnUpdate(Timestep ts) {}
         virtual void OnImGuiRender() {}
         virtual void OnEvent(Event& e) {}
 

@@ -141,6 +141,7 @@
     <ClInclude Include="src\Rabbit.h" />
     <ClInclude Include="src\Rabbit\Application.h" />
     <ClInclude Include="src\Rabbit\Core.h" />
+    <ClInclude Include="src\Rabbit\Core\Timestep.h" />
     <ClInclude Include="src\Rabbit\EntryPoint.h" />
     <ClInclude Include="src\Rabbit\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Rabbit\Events\Event.h" />

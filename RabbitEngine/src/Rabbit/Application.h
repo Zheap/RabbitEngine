@@ -6,6 +6,7 @@
 #include "Rabbit/LayerStack.h"
 #include "Rabbit/Events/Event.h"
 #include "Rabbit/Events/ApplicationEvent.h"
+#include "Rabbit/Core/Timestep.h"
 #include "Rabbit/ImGui/ImGuiLayer.h"
 
 namespace Rabbit {
@@ -34,6 +35,8 @@ namespace Rabbit {
         ImGuiLayer* m_ImGuiLayer;
         bool m_Running = true;
         LayerStack m_LayerStack;
+        Timestep m_Timestep;
+        float m_LastFrameTime = 0.0f;
 
     private:
         static Application* s_Instance;

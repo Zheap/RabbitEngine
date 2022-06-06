@@ -3,6 +3,7 @@
 #include "Rabbit/Log.h"
 #include "Input.h"
 #include "Renderer/Renderer.h"
+#include <glfw/glfw3.h>
 
 namespace Rabbit
 {
@@ -17,6 +18,7 @@ namespace Rabbit
 
         m_Window = std::unique_ptr<Window>(Window::Create());
         m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+        m_Window->SetVSync(false);
 
         m_ImGuiLayer = new ImGuiLayer();
         PushOverLay(m_ImGuiLayer);
@@ -26,6 +28,10 @@ namespace Rabbit
     {
         while (m_Running)
         {
+            float time = (float)glfwGetTime();
+            Timestep timestep = time - m_LastFrameTime;
+            m_LastFrameTime = time;
+
             /*
             * 这里layer->OnUpdate()必须要放在m_window->OnUpdate()之前，因为m_window->OnUpdate()里面会执行glfwSwapBuffers(),
             * 把当前render buffer内存中的数据拷贝到屏幕上；如果layer->OnUpdate()放在m_window->OnUpdate()后面的话，虽然会把layer层的数据写入到buffer内存中，
@@ -33,7 +39,7 @@ namespace Rabbit
             * 因此屏幕上体现就是layer层的绘制不显示
             */
             for (Layer* layer : m_LayerStack)
-                layer->OnUpdate();
+                layer->OnUpdate(timestep);
 
             m_ImGuiLayer->Begin();
             for (Layer* layer : m_LayerStack)

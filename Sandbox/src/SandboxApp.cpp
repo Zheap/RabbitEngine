@@ -22,7 +22,7 @@ public:
         };
 
         // VertexBuffer
-        std::shared_ptr<Rabbit::VertexBuffer> vertexBuffer;
+        Rabbit::Ref<Rabbit::VertexBuffer> vertexBuffer;
         vertexBuffer.reset(Rabbit::VertexBuffer::Create(vertices, sizeof(vertices)));
         Rabbit::BufferLayout layout = {
             { Rabbit::ShaderDataType::Float3, "a_Position" },
@@ -33,7 +33,7 @@ public:
 
         // IndexBuffer
         uint32_t indices[3] = { 0, 1, 2 };
-        std::shared_ptr<Rabbit::IndexBuffer> indexBuffer;
+        Rabbit::Ref<Rabbit::IndexBuffer> indexBuffer;
         indexBuffer.reset(Rabbit::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
         m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -45,7 +45,7 @@ public:
             -0.5f,  0.5f, 0.0f
         };
         m_SquareVA.reset(Rabbit::VertexArray::Create());
-        std::shared_ptr<Rabbit::VertexBuffer> squareVB;
+        Rabbit::Ref<Rabbit::VertexBuffer> squareVB;
         squareVB.reset(Rabbit::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
         squareVB->SetLayout({
@@ -54,7 +54,7 @@ public:
         m_SquareVA->AddVertexBuffer(squareVB);
 
         uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-        std::shared_ptr<Rabbit::IndexBuffer> squareIB;
+        Rabbit::Ref<Rabbit::IndexBuffer> squareIB;
         squareIB.reset(Rabbit::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
         m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -222,11 +222,11 @@ public:
     }
 
 private:
-    std::shared_ptr<Rabbit::Shader> m_Shader;
-    std::shared_ptr<Rabbit::VertexArray> m_VertexArray;
+    Rabbit::Ref<Rabbit::Shader> m_Shader;
+    Rabbit::Ref<Rabbit::VertexArray> m_VertexArray;
 
-    std::shared_ptr<Rabbit::Shader> m_FlatColorShader;
-    std::shared_ptr<Rabbit::VertexArray> m_SquareVA;
+    Rabbit::Ref<Rabbit::Shader> m_FlatColorShader;
+    Rabbit::Ref<Rabbit::VertexArray> m_SquareVA;
 
     Rabbit::OrthographicCamera m_Camera;
     glm::vec3 m_CameraPosition;

@@ -38,18 +38,19 @@ public:
         m_VertexArray->SetIndexBuffer(indexBuffer);
 
 
-        float squareVertices[3 * 4] = {
-            -0.5f, -0.5f, 0.0f,
-             0.5f, -0.5f, 0.0f,
-             0.5f,  0.5f, 0.0f,
-            -0.5f,  0.5f, 0.0f
+        float squareVertices[5 * 4] = {
+            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+             0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+             0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+            -0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
         };
         m_SquareVA.reset(Rabbit::VertexArray::Create());
         Rabbit::Ref<Rabbit::VertexBuffer> squareVB;
         squareVB.reset(Rabbit::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
         squareVB->SetLayout({
-            { Rabbit::ShaderDataType::Float3, "a_Position" }
+            { Rabbit::ShaderDataType::Float3, "a_Position" },
+            { Rabbit::ShaderDataType::Float2, "a_TexCoord" }
             });
         m_SquareVA->AddVertexBuffer(squareVB);
 
@@ -129,6 +130,46 @@ public:
         )";
 
         m_FlatColorShader.reset(Rabbit::Shader::Create(FlatColorShaderVertexSrc, FlatColorShaderFragmentSrc));
+
+        std::string textureShaderVertexSrc = R"(
+            #version 330 core
+            
+            layout(location = 0) in vec3 a_Position;
+            layout(location = 1) in vec2 a_TexCoord;
+
+            uniform mat4 u_ViewProjection;
+            uniform mat4 u_Transform;
+
+            out vec2 v_TexCoord;
+
+            void main()
+            {
+                v_TexCoord = a_TexCoord;
+                gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+            }
+        )";
+
+        std::string textureShaderFragmentSrc = R"(
+            #version 330 core
+            
+            layout(location = 0) out vec4 color;
+
+            in vec2 v_TexCoord;
+
+            uniform sampler2D u_Texture;
+
+            void main()
+            {
+                color = texture(u_Texture, v_TexCoord);
+            }
+        )";
+
+        m_TextureShader.reset(Rabbit::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+        m_Texture = Rabbit::Texture2D::Create("assets/textures/Checkerboard.png");
+
+        std::dynamic_pointer_cast<Rabbit::OpenGLShader>(m_TextureShader)->Bind();
+        std::dynamic_pointer_cast<Rabbit::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);  // texture slot
     }
 
     void OnUpdate(Rabbit::Timestep ts) override
@@ -184,7 +225,11 @@ public:
             }
         }
 
-        Rabbit::Renderer::Submit(m_Shader, m_VertexArray);
+        m_Texture->Bind();
+        Rabbit::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
+        // Triangle
+        // Rabbit::Renderer::Submit(m_Shader, m_VertexArray);
 
         Rabbit::Renderer::EndScene();
     }
@@ -225,8 +270,10 @@ private:
     Rabbit::Ref<Rabbit::Shader> m_Shader;
     Rabbit::Ref<Rabbit::VertexArray> m_VertexArray;
 
-    Rabbit::Ref<Rabbit::Shader> m_FlatColorShader;
+    Rabbit::Ref<Rabbit::Shader> m_FlatColorShader, m_TextureShader;
     Rabbit::Ref<Rabbit::VertexArray> m_SquareVA;
+
+    Rabbit::Ref<Rabbit::Texture> m_Texture;
 
     Rabbit::OrthographicCamera m_Camera;
     glm::vec3 m_CameraPosition;

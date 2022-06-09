@@ -20,6 +20,7 @@
 
 #include "Rabbit/Renderer/Buffer.h"
 #include "Rabbit/Renderer/Shader.h"
+#include "Rabbit/Renderer/Texture.h"
 #include "Rabbit/Renderer/VertexArray.h"
 
 #include "Rabbit/Renderer/OrthographicCamera.h"

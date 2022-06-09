@@ -7,17 +7,26 @@
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Rabbit">
       <UniqueIdentifier>{7096972B-5C4E-D978-C555-B2D4B12C7469}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Rabbit\Core">
+      <UniqueIdentifier>{C84080F0-34CC-EDB4-3DDD-70A9A9E749B5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Rabbit\Events">
       <UniqueIdentifier>{54A4B516-C0BA-B3AC-0932-3FCE75878434}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Rabbit\ImGui">
       <UniqueIdentifier>{9A1FF300-8618-1253-AF4A-F7D79BA2F15E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Rabbit\Renderer">
+      <UniqueIdentifier>{1618AB91-8279-889F-0BE7-CE517747BF5E}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
@@ -40,8 +49,29 @@
     <Filter Include="vendor\glm\glm\gtx">
       <UniqueIdentifier>{B3A6A76B-9F8A-68C1-08EB-6214F4ED5243}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vendor\stb_image">
+      <UniqueIdentifier>{0DA0BA59-F998-D9AB-22CB-BE300E23B9B7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>src\Platform\Windows</Filter>
     </ClInclude>
@@ -56,6 +86,9 @@
     </ClInclude>
     <ClInclude Include="src\Rabbit\Core.h">
       <Filter>src\Rabbit</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Core\Timestep.h">
+      <Filter>src\Rabbit\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Rabbit\EntryPoint.h">
       <Filter>src\Rabbit</Filter>
@@ -92,6 +125,33 @@
     </ClInclude>
     <ClInclude Include="src\Rabbit\MouseButtonCodes.h">
       <Filter>src\Rabbit</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Renderer\Buffer.h">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Renderer\GraphicsContext.h">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Renderer\OrthographicCamera.h">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Renderer\RenderCommand.h">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Renderer\Renderer.h">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Renderer\RendererAPI.h">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Renderer\Shader.h">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Renderer\Texture.h">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Renderer\VertexArray.h">
+      <Filter>src\Rabbit\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Rabbit\Window.h">
       <Filter>src\Rabbit</Filter>
@@ -1344,22 +1404,29 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rabbit\Renderer\GraphicsContext.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
-    <ClInclude Include="src\Rabbit\Renderer\Shader.h" />
-    <ClInclude Include="src\Rabbit\Renderer\Buffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
-    <ClInclude Include="src\Rabbit\Renderer\Renderer.h" />
-    <ClInclude Include="src\Rabbit\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Rabbit\Renderer\RendererAPI.h" />
-    <ClInclude Include="src\Rabbit\Renderer\RenderCommand.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
-    <ClInclude Include="src\Rabbit\Renderer\OrthographicCamera.h" />
-    <ClInclude Include="src\Rabbit\Core\Timestep.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="vendor\stb_image\stb_image.h">
+      <Filter>vendor\stb_image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
@@ -1384,20 +1451,35 @@
     <ClCompile Include="src\Rabbit\Log.cpp">
       <Filter>src\Rabbit</Filter>
     </ClCompile>
+    <ClCompile Include="src\Rabbit\Renderer\Buffer.cpp">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Renderer\OrthographicCamera.cpp">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Renderer\RenderCommand.cpp">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Renderer\Renderer.cpp">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Renderer\RendererAPI.cpp">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Renderer\Shader.cpp">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Renderer\Texture.cpp">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Renderer\VertexArray.cpp">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\rbpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
-    <ClCompile Include="src\Rabbit\Renderer\Shader.cpp" />
-    <ClCompile Include="src\Rabbit\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
-    <ClCompile Include="src\Rabbit\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\Rabbit\Renderer\VertexArray.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="src\Rabbit\Renderer\RendererAPI.cpp" />
-    <ClCompile Include="src\Rabbit\Renderer\RenderCommand.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
-    <ClCompile Include="src\Rabbit\Renderer\OrthographicCamera.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="vendor\stb_image\stb_image.cpp">
+      <Filter>vendor\stb_image</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

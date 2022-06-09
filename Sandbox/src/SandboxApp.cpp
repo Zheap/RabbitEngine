@@ -166,6 +166,7 @@ public:
 
         m_TextureShader.reset(Rabbit::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 
+        // 我理解texture的本质是：把纹理(图片)的数据缓存到GPU中，配合着texCoord，将数据送给Fragment Shader里的color成员，绘制color即绘制纹理(图片)
         m_Texture = Rabbit::Texture2D::Create("assets/textures/Checkerboard.png");
 
         std::dynamic_pointer_cast<Rabbit::OpenGLShader>(m_TextureShader)->Bind();
@@ -225,6 +226,7 @@ public:
             }
         }
 
+        // Fragment里面的uniform sampler2D u_Texture; 会默认在buffer里面对应的slot = 0 位置查找texture data，所以即使上面m_TextureShader没有uploadUniformInt(u_Texture)，图片也能正常绘制
         m_Texture->Bind();
         Rabbit::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 

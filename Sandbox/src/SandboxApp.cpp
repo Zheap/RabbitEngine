@@ -168,6 +168,7 @@ public:
 
         // 我理解texture的本质是：把纹理(图片)的数据缓存到GPU中，配合着texCoord，将数据送给Fragment Shader里的color成员，绘制color即绘制纹理(图片)
         m_Texture = Rabbit::Texture2D::Create("assets/textures/Checkerboard.png");
+        m_ChernoLogoTexture = Rabbit::Texture2D::Create("assets/textures/ChernoLogo.png");
 
         std::dynamic_pointer_cast<Rabbit::OpenGLShader>(m_TextureShader)->Bind();
         std::dynamic_pointer_cast<Rabbit::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);  // texture slot
@@ -230,6 +231,9 @@ public:
         m_Texture->Bind();
         Rabbit::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
+        m_ChernoLogoTexture->Bind();
+        Rabbit::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
         // Triangle
         // Rabbit::Renderer::Submit(m_Shader, m_VertexArray);
 
@@ -275,7 +279,7 @@ private:
     Rabbit::Ref<Rabbit::Shader> m_FlatColorShader, m_TextureShader;
     Rabbit::Ref<Rabbit::VertexArray> m_SquareVA;
 
-    Rabbit::Ref<Rabbit::Texture> m_Texture;
+    Rabbit::Ref<Rabbit::Texture> m_Texture, m_ChernoLogoTexture;
 
     Rabbit::OrthographicCamera m_Camera;
     glm::vec3 m_CameraPosition;

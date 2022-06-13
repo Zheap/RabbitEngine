@@ -11,6 +11,11 @@ workspace "RabbitEngine"		-- 设置工作区目录
         "Dist"
     }
 
+    flags
+    {
+        "MultiProcessorCompile"
+    }
+
 -- 配置输出目录，cfg是上面的configurations的缩写
 -- 拼接目录类似：Debug-windows-x86_64
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"

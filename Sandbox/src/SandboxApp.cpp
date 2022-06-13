@@ -95,7 +95,7 @@ public:
             }
         )";
 
-        m_Shader.reset(Rabbit::Shader::Create(vertexSrc, fragmentSrc));
+        m_Shader = Rabbit::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
 
         std::string FlatColorShaderVertexSrc = R"(
             #version 330 core
@@ -129,16 +129,16 @@ public:
             }
         )";
 
-        m_FlatColorShader.reset(Rabbit::Shader::Create(FlatColorShaderVertexSrc, FlatColorShaderFragmentSrc));
+        m_FlatColorShader = Rabbit::Shader::Create("FlatColor", FlatColorShaderVertexSrc, FlatColorShaderFragmentSrc);
 
-        m_TextureShader.reset(Rabbit::Shader::Create("assets/shaders/Texture.glsl"));
+        auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
         // 我理解texture的本质是：把纹理(图片)的数据缓存到GPU中，配合着texCoord，将数据送给Fragment Shader里的color成员，绘制color即绘制纹理(图片)
         m_Texture = Rabbit::Texture2D::Create("assets/textures/Checkerboard.png");
         m_ChernoLogoTexture = Rabbit::Texture2D::Create("assets/textures/ChernoLogo.png");
 
-        std::dynamic_pointer_cast<Rabbit::OpenGLShader>(m_TextureShader)->Bind();
-        std::dynamic_pointer_cast<Rabbit::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);  // texture slot
+        std::dynamic_pointer_cast<Rabbit::OpenGLShader>(textureShader)->Bind();
+        std::dynamic_pointer_cast<Rabbit::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);  // texture slot
     }
 
     void OnUpdate(Rabbit::Timestep ts) override
@@ -194,12 +194,13 @@ public:
             }
         }
 
+        auto textureShader = m_ShaderLibrary.Get("Texture");
         // Fragment里面的uniform sampler2D u_Texture; 会默认在buffer里面对应的slot = 0 位置查找texture data，所以即使上面m_TextureShader没有uploadUniformInt(u_Texture)，图片也能正常绘制
         m_Texture->Bind();
-        Rabbit::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+        Rabbit::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
         m_ChernoLogoTexture->Bind();
-        Rabbit::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+        Rabbit::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
         // Triangle
         // Rabbit::Renderer::Submit(m_Shader, m_VertexArray);
@@ -240,10 +241,11 @@ public:
     }
 
 private:
+    Rabbit::ShaderLibrary m_ShaderLibrary;
     Rabbit::Ref<Rabbit::Shader> m_Shader;
     Rabbit::Ref<Rabbit::VertexArray> m_VertexArray;
 
-    Rabbit::Ref<Rabbit::Shader> m_FlatColorShader, m_TextureShader;
+    Rabbit::Ref<Rabbit::Shader> m_FlatColorShader;
     Rabbit::Ref<Rabbit::VertexArray> m_SquareVA;
 
     Rabbit::Ref<Rabbit::Texture> m_Texture, m_ChernoLogoTexture;

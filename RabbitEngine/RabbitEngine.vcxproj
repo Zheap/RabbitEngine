@@ -156,6 +156,7 @@
     <ClInclude Include="src\Rabbit\LayerStack.h" />
     <ClInclude Include="src\Rabbit\Log.h" />
     <ClInclude Include="src\Rabbit\MouseButtonCodes.h" />
+    <ClInclude Include="src\Rabbit\OrthographicCameraController.h" />
     <ClInclude Include="src\Rabbit\Renderer\Buffer.h" />
     <ClInclude Include="src\Rabbit\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Rabbit\Renderer\OrthographicCamera.h" />
@@ -599,6 +600,7 @@
     <ClCompile Include="src\Rabbit\Layer.cpp" />
     <ClCompile Include="src\Rabbit\LayerStack.cpp" />
     <ClCompile Include="src\Rabbit\Log.cpp" />
+    <ClCompile Include="src\Rabbit\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\RenderCommand.cpp" />

@@ -11,6 +11,7 @@
 #include "Rabbit/Input.h"
 #include "Rabbit/KeyCodes.h"
 #include "Rabbit/MouseButtonCodes.h"
+#include "Rabbit/OrthographicCameraController.h"
 
 #include "Rabbit/ImGui/ImGuiLayer.h"
 

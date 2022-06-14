@@ -11,7 +11,7 @@ class ExampleLayer : public Rabbit::Layer
 {
 public:
     ExampleLayer()
-        : Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f), m_SquarePosition(0.0f)
+        : Layer("Example"), m_CameraController(1280.0f / 720.0f, true)
     {
         m_VertexArray.reset(Rabbit::VertexArray::Create());
 
@@ -143,41 +143,14 @@ public:
 
     void OnUpdate(Rabbit::Timestep ts) override
     {
-        RB_TRACE("Delta time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMilliseconds());
+        // OnUpdate
+        m_CameraController.OnUpdate(ts);
 
-        if (Rabbit::Input::IsKeyPressed(RB_KEY_LEFT))
-            m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-        else if (Rabbit::Input::IsKeyPressed(RB_KEY_RIGHT))
-            m_CameraPosition.x += m_CameraMoveSpeed * ts;
-
-        if (Rabbit::Input::IsKeyPressed(RB_KEY_UP))
-            m_CameraPosition.y += m_CameraMoveSpeed * ts;
-        else if (Rabbit::Input::IsKeyPressed(RB_KEY_DOWN))
-            m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-
-        if (Rabbit::Input::IsKeyPressed(RB_KEY_A))
-            m_CameraRotation += m_CameraRotationSpeed * ts;
-        if (Rabbit::Input::IsKeyPressed(RB_KEY_D))
-            m_CameraRotation -= m_CameraRotationSpeed * ts;
-
-        //if (Rabbit::Input::IsKeyPressed(RB_KEY_J))
-        //    m_SquarePosition.x -= m_SquareMoveSpeed * ts;
-        //else if (Rabbit::Input::IsKeyPressed(RB_KEY_L))
-        //    m_SquarePosition.x += m_SquareMoveSpeed * ts;
-
-        //if (Rabbit::Input::IsKeyPressed(RB_KEY_I))
-        //    m_SquarePosition.y += m_SquareMoveSpeed * ts;
-        //else if (Rabbit::Input::IsKeyPressed(RB_KEY_K))
-        //    m_SquarePosition.y -= m_SquareMoveSpeed * ts;
-
-
+        // Render
         Rabbit::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
         Rabbit::RenderCommand::Clear();
 
-        m_Camera.SetPosition(m_CameraPosition);
-        m_Camera.SetRotation(m_CameraRotation);
-
-        Rabbit::Renderer::BeginScene(m_Camera);
+        Rabbit::Renderer::BeginScene(m_CameraController.GetCamera());
 
         glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -217,27 +190,7 @@ public:
 
     void OnEvent(Rabbit::Event& event) override
     {
-        //Rabbit::EventDispatcher dispatcher(event);
-        //dispatcher.Dispatch<Rabbit::KeyPressedEvent>(RB_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
-    }
-
-    bool OnKeyPressedEvent(Rabbit::KeyPressedEvent& event)
-    {
-        // chunky movement on event system
-
-        //if (event.GetKeyCode() == RB_KEY_LEFT)
-        //    m_CameraPosition.x -= m_CameraSpeed;
-
-        //if (event.GetKeyCode() == RB_KEY_RIGHT)
-        //    m_CameraPosition.x += m_CameraSpeed;
-
-        //if (event.GetKeyCode() == RB_KEY_DOWN)
-        //    m_CameraPosition.y -= m_CameraSpeed;
-
-        //if (event.GetKeyCode() == RB_KEY_UP)
-        //    m_CameraPosition.y += m_CameraSpeed;
-
-        return false;
+        m_CameraController.OnEvent(event);
     }
 
 private:
@@ -250,16 +203,7 @@ private:
 
     Rabbit::Ref<Rabbit::Texture> m_Texture, m_ChernoLogoTexture;
 
-    Rabbit::OrthographicCamera m_Camera;
-    glm::vec3 m_CameraPosition;
-    float m_CameraMoveSpeed = 5.0f;
-
-    float m_CameraRotation = 0.0f;
-    float m_CameraRotationSpeed = 180.0f;
-
-    glm::vec3 m_SquarePosition;
-    float m_SquareMoveSpeed = 5.0f;
-
+    Rabbit::OrthographicCameraController m_CameraController;
     glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };
 

@@ -40,13 +40,16 @@ namespace Rabbit
             * 但是在下一次进入到循环时，会经历glClear(GL_COLOR_BUFFER_BIT)，会清空掉buffer，此时又会glfwSwapBuffers(), 给到屏幕的内存数据又是空的（其实是带有ClearColor）
             * 因此屏幕上体现就是layer层的绘制不显示
             */
-            for (Layer* layer : m_LayerStack)
-                layer->OnUpdate(timestep);
+            if (!m_Minimized)
+            {
+                for (Layer* layer : m_LayerStack)
+                    layer->OnUpdate(timestep);
 
-            m_ImGuiLayer->Begin();
-            for (Layer* layer : m_LayerStack)
-                layer->OnImGuiRender();
-            m_ImGuiLayer->End();
+                m_ImGuiLayer->Begin();
+                for (Layer* layer : m_LayerStack)
+                    layer->OnImGuiRender();
+                m_ImGuiLayer->End();
+            }
 
             m_Window->OnUpdate();
         }
@@ -56,6 +59,7 @@ namespace Rabbit
     {
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+        dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
 
         for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
         {
@@ -80,4 +84,19 @@ namespace Rabbit
         m_Running = false;
         return true;
     }
+
+    bool Application::OnWindowResize(WindowResizeEvent& e)
+    {
+        if (e.GetWidth() == 0 || e.GetHeight() == 0)
+        {
+            m_Minimized = true;
+            return false;
+        }
+
+        m_Minimized = false;
+        Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+
+        return false;
+    }
+
 }

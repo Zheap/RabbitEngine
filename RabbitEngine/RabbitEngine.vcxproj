@@ -80,7 +80,9 @@
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -100,7 +102,9 @@
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -120,7 +124,9 @@
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -141,32 +147,32 @@
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Rabbit.h" />
-    <ClInclude Include="src\Rabbit\Application.h" />
-    <ClInclude Include="src\Rabbit\Core.h" />
+    <ClInclude Include="src\Rabbit\Core\Application.h" />
+    <ClInclude Include="src\Rabbit\Core\Core.h" />
+    <ClInclude Include="src\Rabbit\Core\EntryPoint.h" />
+    <ClInclude Include="src\Rabbit\Core\Input.h" />
+    <ClInclude Include="src\Rabbit\Core\KeyCodes.h" />
+    <ClInclude Include="src\Rabbit\Core\Layer.h" />
+    <ClInclude Include="src\Rabbit\Core\LayerStack.h" />
+    <ClInclude Include="src\Rabbit\Core\Log.h" />
+    <ClInclude Include="src\Rabbit\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\Rabbit\Core\Timestep.h" />
-    <ClInclude Include="src\Rabbit\EntryPoint.h" />
+    <ClInclude Include="src\Rabbit\Core\Window.h" />
     <ClInclude Include="src\Rabbit\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Rabbit\Events\Event.h" />
     <ClInclude Include="src\Rabbit\Events\KeyEvent.h" />
     <ClInclude Include="src\Rabbit\Events\MouseEvent.h" />
     <ClInclude Include="src\Rabbit\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Rabbit\Input.h" />
-    <ClInclude Include="src\Rabbit\KeyCodes.h" />
-    <ClInclude Include="src\Rabbit\Layer.h" />
-    <ClInclude Include="src\Rabbit\LayerStack.h" />
-    <ClInclude Include="src\Rabbit\Log.h" />
-    <ClInclude Include="src\Rabbit\MouseButtonCodes.h" />
-    <ClInclude Include="src\Rabbit\OrthographicCameraController.h" />
     <ClInclude Include="src\Rabbit\Renderer\Buffer.h" />
     <ClInclude Include="src\Rabbit\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Rabbit\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Rabbit\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\Rabbit\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Rabbit\Renderer\Renderer.h" />
     <ClInclude Include="src\Rabbit\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Rabbit\Renderer\Shader.h" />
     <ClInclude Include="src\Rabbit\Renderer\Texture.h" />
     <ClInclude Include="src\Rabbit\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Rabbit\Window.h" />
     <ClInclude Include="src\rbpch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
@@ -594,15 +600,15 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
-    <ClCompile Include="src\Rabbit\Application.cpp" />
+    <ClCompile Include="src\Rabbit\Core\Application.cpp" />
+    <ClCompile Include="src\Rabbit\Core\Layer.cpp" />
+    <ClCompile Include="src\Rabbit\Core\LayerStack.cpp" />
+    <ClCompile Include="src\Rabbit\Core\Log.cpp" />
     <ClCompile Include="src\Rabbit\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Rabbit\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Rabbit\Layer.cpp" />
-    <ClCompile Include="src\Rabbit\LayerStack.cpp" />
-    <ClCompile Include="src\Rabbit\Log.cpp" />
-    <ClCompile Include="src\Rabbit\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Rabbit\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\RendererAPI.cpp" />

@@ -2,16 +2,16 @@
 
 // For use by Rabbit applications
 
-#include "Rabbit/Application.h"
-#include "Rabbit/Log.h"
-#include "Rabbit/Layer.h"
+#include "Rabbit/Core/Application.h"
+#include "Rabbit/Core/Log.h"
+#include "Rabbit/Core/Layer.h"
 
 #include "Rabbit/Core/Timestep.h"
 
-#include "Rabbit/Input.h"
-#include "Rabbit/KeyCodes.h"
-#include "Rabbit/MouseButtonCodes.h"
-#include "Rabbit/OrthographicCameraController.h"
+#include "Rabbit/Core/Input.h"
+#include "Rabbit/Core/KeyCodes.h"
+#include "Rabbit/Core/MouseButtonCodes.h"
+#include "Rabbit/Renderer/OrthographicCameraController.h"
 
 #include "Rabbit/ImGui/ImGuiLayer.h"
 
@@ -28,5 +28,5 @@
 // ---------------------------------------
 
 // -------------Entry Point---------------
-#include "Rabbit/EntryPoint.h"
+#include "Rabbit/Core/EntryPoint.h"
 // ---------------------------------------

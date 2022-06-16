@@ -1,8 +1,8 @@
 #include "rbpch.h"
 #include "OrthographicCameraController.h"
 
-#include "Rabbit/Input.h"
-#include "Rabbit/KeyCodes.h"
+#include "Rabbit/Core/Input.h"
+#include "Rabbit/COre/KeyCodes.h"
 
 namespace Rabbit {
 

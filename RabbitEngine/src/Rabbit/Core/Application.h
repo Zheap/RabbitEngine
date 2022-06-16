@@ -3,7 +3,7 @@
 #include "Core.h"
 
 #include "Window.h"
-#include "Rabbit/LayerStack.h"
+#include "Rabbit/Core/LayerStack.h"
 #include "Rabbit/Events/Event.h"
 #include "Rabbit/Events/ApplicationEvent.h"
 #include "Rabbit/Core/Timestep.h"

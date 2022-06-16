@@ -1,8 +1,8 @@
 #include "rbpch.h"
 #include "Application.h"
-#include "Rabbit/Log.h"
+#include "Rabbit/Core/Log.h"
 #include "Input.h"
-#include "Renderer/Renderer.h"
+#include "Rabbit/Renderer/Renderer.h"
 #include <glfw/glfw3.h>
 
 namespace Rabbit

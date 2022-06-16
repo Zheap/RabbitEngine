@@ -1,6 +1,6 @@
 #include "rbpch.h"
 #include "WindowsInput.h"
-#include "Rabbit/Application.h"
+#include "Rabbit/Core/Application.h"
 
 #include <GLFW/glfw3.h>
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Rabbit/Window.h"
+#include "Rabbit/Core/Window.h"
 #include "Rabbit/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>

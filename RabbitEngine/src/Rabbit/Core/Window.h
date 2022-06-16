@@ -1,7 +1,7 @@
 #pragma once
 
 #include "rbpch.h"
-#include "Rabbit/Core.h"
+#include "Rabbit/Core/Core.h"
 #include "Rabbit/Events/Event.h"
 
 namespace Rabbit {

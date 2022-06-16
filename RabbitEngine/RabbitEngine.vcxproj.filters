@@ -81,17 +81,38 @@
     <ClInclude Include="src\Rabbit.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rabbit\Application.h">
-      <Filter>src\Rabbit</Filter>
+    <ClInclude Include="src\Rabbit\Core\Application.h">
+      <Filter>src\Rabbit\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rabbit\Core.h">
-      <Filter>src\Rabbit</Filter>
+    <ClInclude Include="src\Rabbit\Core\Core.h">
+      <Filter>src\Rabbit\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Core\EntryPoint.h">
+      <Filter>src\Rabbit\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Core\Input.h">
+      <Filter>src\Rabbit\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Core\KeyCodes.h">
+      <Filter>src\Rabbit\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Core\Layer.h">
+      <Filter>src\Rabbit\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Core\LayerStack.h">
+      <Filter>src\Rabbit\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Core\Log.h">
+      <Filter>src\Rabbit\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Core\MouseButtonCodes.h">
+      <Filter>src\Rabbit\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Rabbit\Core\Timestep.h">
       <Filter>src\Rabbit\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rabbit\EntryPoint.h">
-      <Filter>src\Rabbit</Filter>
+    <ClInclude Include="src\Rabbit\Core\Window.h">
+      <Filter>src\Rabbit\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Rabbit\Events\ApplicationEvent.h">
       <Filter>src\Rabbit\Events</Filter>
@@ -108,24 +129,6 @@
     <ClInclude Include="src\Rabbit\ImGui\ImGuiLayer.h">
       <Filter>src\Rabbit\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rabbit\Input.h">
-      <Filter>src\Rabbit</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Rabbit\KeyCodes.h">
-      <Filter>src\Rabbit</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Rabbit\Layer.h">
-      <Filter>src\Rabbit</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Rabbit\LayerStack.h">
-      <Filter>src\Rabbit</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Rabbit\Log.h">
-      <Filter>src\Rabbit</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Rabbit\MouseButtonCodes.h">
-      <Filter>src\Rabbit</Filter>
-    </ClInclude>
     <ClInclude Include="src\Rabbit\Renderer\Buffer.h">
       <Filter>src\Rabbit\Renderer</Filter>
     </ClInclude>
@@ -133,6 +136,9 @@
       <Filter>src\Rabbit\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Rabbit\Renderer\OrthographicCamera.h">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Renderer\OrthographicCameraController.h">
       <Filter>src\Rabbit\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Rabbit\Renderer\RenderCommand.h">
@@ -152,9 +158,6 @@
     </ClInclude>
     <ClInclude Include="src\Rabbit\Renderer\VertexArray.h">
       <Filter>src\Rabbit\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Rabbit\Window.h">
-      <Filter>src\Rabbit</Filter>
     </ClInclude>
     <ClInclude Include="src\rbpch.h">
       <Filter>src</Filter>
@@ -1407,7 +1410,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rabbit\OrthographicCameraController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1434,8 +1436,17 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rabbit\Application.cpp">
-      <Filter>src\Rabbit</Filter>
+    <ClCompile Include="src\Rabbit\Core\Application.cpp">
+      <Filter>src\Rabbit\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Core\Layer.cpp">
+      <Filter>src\Rabbit\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Core\LayerStack.cpp">
+      <Filter>src\Rabbit\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Core\Log.cpp">
+      <Filter>src\Rabbit\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Rabbit\ImGui\ImGuiBuild.cpp">
       <Filter>src\Rabbit\ImGui</Filter>
@@ -1443,19 +1454,13 @@
     <ClCompile Include="src\Rabbit\ImGui\ImGuiLayer.cpp">
       <Filter>src\Rabbit\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rabbit\Layer.cpp">
-      <Filter>src\Rabbit</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Rabbit\LayerStack.cpp">
-      <Filter>src\Rabbit</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Rabbit\Log.cpp">
-      <Filter>src\Rabbit</Filter>
-    </ClCompile>
     <ClCompile Include="src\Rabbit\Renderer\Buffer.cpp">
       <Filter>src\Rabbit\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Rabbit\Renderer\OrthographicCamera.cpp">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Renderer\OrthographicCameraController.cpp">
       <Filter>src\Rabbit\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Rabbit\Renderer\RenderCommand.cpp">
@@ -1482,6 +1487,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rabbit\OrthographicCameraController.cpp" />
   </ItemGroup>
 </Project>

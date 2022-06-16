@@ -91,7 +91,6 @@ project "RabbitEngine"
 
         defines							-- 添加Windows平台上的预处理定义
         {
-            "RB_PLATFORM_WINDOWS",
             "RB_BUILD_DLL",
             "GLFW_INCLUDE_NONE",
         }
@@ -143,11 +142,6 @@ project "Sandbox"
 
     filter "system:windows"
         systemversion "latest"
-
-        defines
-        {
-            "RB_PLATFORM_WINDOWS"
-        }
 
     filter "configurations:Debug"
         defines "RB_DEBUG"

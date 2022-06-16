@@ -31,7 +31,7 @@ namespace Rabbit {
 
     private:
         GLFWwindow* m_Window;
-        GraphicsContext* m_Context;
+        Scope<GraphicsContext> m_Context;
 
         struct WindowData
         {

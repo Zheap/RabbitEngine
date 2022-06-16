@@ -37,7 +37,7 @@ namespace Rabbit {
     GetEventType() : 这个接口是为了当父类Event对象指向子类对象时，判断对象具体所属的子类类型所用
 
 */
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
+#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
                                 virtual EventType GetEventType() const override { return GetStaticType(); }\
                                 virtual const char* GetName() const override { return #type; }
 

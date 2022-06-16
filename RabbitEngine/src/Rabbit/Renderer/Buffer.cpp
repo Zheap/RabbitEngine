@@ -6,7 +6,7 @@
 namespace Rabbit {
 
 
-    Rabbit::VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
+    Rabbit::Ref<Rabbit::VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
     {
         switch (Renderer::GetAPI())
         {
@@ -14,14 +14,14 @@ namespace Rabbit {
             RB_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
         case RendererAPI::API::OpenGL:
-            return new OpenGLVertexBuffer(vertices, size);
+            return Rabbit::CreateRef<OpenGLVertexBuffer>(vertices, size);
         }
 
         RB_CORE_ASSERT(false, "Unknow RendererAPI");
         return nullptr;
     }
 
-    IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t count)
+    Rabbit::Ref<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t count)
     {
         switch (Renderer::GetAPI())
         {
@@ -29,7 +29,7 @@ namespace Rabbit {
             RB_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
             return nullptr;
         case RendererAPI::API::OpenGL:
-            return new OpenGLIndexBuffer(indices, count);
+            return Rabbit::CreateRef<OpenGLIndexBuffer>(indices, count);
         }
 
         RB_CORE_ASSERT(false, "Unknow RendererAPI");

@@ -1,4 +1,5 @@
 #include <Rabbit.h>
+#include <Rabbit/Core/EntryPoint.h>
 #include "Platform/OpenGL/OpenGLShader.h"
 
 #include "imgui/imgui.h"
@@ -6,6 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Sandbox2D.h"
 
 class ExampleLayer : public Rabbit::Layer
 {
@@ -13,7 +15,7 @@ public:
     ExampleLayer()
         : Layer("Example"), m_CameraController(1280.0f / 720.0f, true)
     {
-        m_VertexArray.reset(Rabbit::VertexArray::Create());
+        m_VertexArray = Rabbit::VertexArray::Create();
 
         float vertices[3 * 7] = {
             -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -23,7 +25,7 @@ public:
 
         // VertexBuffer
         Rabbit::Ref<Rabbit::VertexBuffer> vertexBuffer;
-        vertexBuffer.reset(Rabbit::VertexBuffer::Create(vertices, sizeof(vertices)));
+        vertexBuffer = Rabbit::VertexBuffer::Create(vertices, sizeof(vertices));
         Rabbit::BufferLayout layout = {
             { Rabbit::ShaderDataType::Float3, "a_Position" },
             { Rabbit::ShaderDataType::Float4, "a_Color"    }
@@ -34,7 +36,7 @@ public:
         // IndexBuffer
         uint32_t indices[3] = { 0, 1, 2 };
         Rabbit::Ref<Rabbit::IndexBuffer> indexBuffer;
-        indexBuffer.reset(Rabbit::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+        indexBuffer = Rabbit::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
         m_VertexArray->SetIndexBuffer(indexBuffer);
 
 
@@ -44,9 +46,9 @@ public:
              0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
             -0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
         };
-        m_SquareVA.reset(Rabbit::VertexArray::Create());
+        m_SquareVA = Rabbit::VertexArray::Create();
         Rabbit::Ref<Rabbit::VertexBuffer> squareVB;
-        squareVB.reset(Rabbit::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+        squareVB = Rabbit::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 
         squareVB->SetLayout({
             { Rabbit::ShaderDataType::Float3, "a_Position" },
@@ -56,7 +58,7 @@ public:
 
         uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
         Rabbit::Ref<Rabbit::IndexBuffer> squareIB;
-        squareIB.reset(Rabbit::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+        squareIB = Rabbit::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
         m_SquareVA->SetIndexBuffer(squareIB);
 
 
@@ -212,7 +214,8 @@ class Sandbox : public Rabbit::Application
 public:
     Sandbox()
     {
-        PushLayer(new ExampleLayer());
+        //PushLayer(new ExampleLayer());
+        PushLayer(new Sandbox2D());
 
     }
     ~Sandbox() {}

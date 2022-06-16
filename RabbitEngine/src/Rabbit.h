@@ -26,7 +26,3 @@
 
 #include "Rabbit/Renderer/OrthographicCamera.h"
 // ---------------------------------------
-
-// -------------Entry Point---------------
-#include "Rabbit/Core/EntryPoint.h"
-// ---------------------------------------

@@ -202,7 +202,7 @@ namespace Rabbit {
         }
 
         for (auto id : glShaderIDs)
-            glDeleteShader(id);
+            glDetachShader(program, id);
 
         m_RendererID = program;
     }

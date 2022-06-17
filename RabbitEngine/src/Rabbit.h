@@ -17,6 +17,7 @@
 
 // -------------Renderer------------------
 #include "Rabbit/Renderer/Renderer.h"
+#include "Rabbit/Renderer/Renderer2D.h"
 #include "Rabbit/Renderer/RenderCommand.h"
 
 #include "Rabbit/Renderer/Buffer.h"

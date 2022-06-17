@@ -1,6 +1,6 @@
 #include "rbpch.h"
 #include "Renderer.h"
-
+#include "Renderer2D.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Rabbit {
@@ -10,6 +10,7 @@ namespace Rabbit {
     void Renderer::Init()
     {
         RenderCommand::Init();
+        Renderer2D::Init();
     }
 
     void Renderer::OnWindowResize(uint32_t width, uint32_t height)

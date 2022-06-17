@@ -13,28 +13,7 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
-    m_SquareVA = Rabbit::VertexArray::Create();
 
-    float squareVertices[3 * 4] = {
-        -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-         0.5f,  0.5f, 0.0f,
-        -0.5f,  0.5f, 0.0f,
-    };
-    Rabbit::Ref<Rabbit::VertexBuffer> squareVB;
-    squareVB = Rabbit::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
-
-    squareVB->SetLayout({
-        { Rabbit::ShaderDataType::Float3, "a_Position" },
-        });
-    m_SquareVA->AddVertexBuffer(squareVB);
-
-    uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-    Rabbit::Ref<Rabbit::IndexBuffer> squareIB;
-    squareIB = Rabbit::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
-    m_SquareVA->SetIndexBuffer(squareIB);
-
-    m_FlatColorShader = Rabbit::Shader::Create("assets/shaders/FlatColor.glsl");
 }
 
 void Sandbox2D::OnDetach()
@@ -51,14 +30,11 @@ void Sandbox2D::OnUpdate(Rabbit::Timestep ts)
     Rabbit::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
     Rabbit::RenderCommand::Clear();
 
-    Rabbit::Renderer::BeginScene(m_CameraController.GetCamera());
+    Rabbit::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-    std::dynamic_pointer_cast<Rabbit::OpenGLShader>(m_FlatColorShader)->Bind();
-    std::dynamic_pointer_cast<Rabbit::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", m_SquareColor);
+    Rabbit::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.3f, 1.0f });
 
-    Rabbit::Renderer::Submit(m_FlatColorShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
-
-    Rabbit::Renderer::EndScene();
+    Rabbit::Renderer2D::EndScene();
 }
 
 void Sandbox2D::OnImGuiRender()

@@ -14,6 +14,7 @@
 #include <unordered_set>
 
 #include "Rabbit/Core/Log.h"
+#include "Rabbit/Debug/Instrumentor.h"
 
 #ifdef RB_PLATFORM_WINDOWS
     #include <Windows.h>

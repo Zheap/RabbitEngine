@@ -158,6 +158,7 @@
     <ClInclude Include="src\Rabbit\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\Rabbit\Core\Timestep.h" />
     <ClInclude Include="src\Rabbit\Core\Window.h" />
+    <ClInclude Include="src\Rabbit\Debug\Instrumentor.h" />
     <ClInclude Include="src\Rabbit\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Rabbit\Events\Event.h" />
     <ClInclude Include="src\Rabbit\Events\KeyEvent.h" />

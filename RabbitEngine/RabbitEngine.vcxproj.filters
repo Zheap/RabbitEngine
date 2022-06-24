@@ -1490,5 +1490,6 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\Rabbit\Renderer\Renderer2D.cpp" />
+    <ClCompile Include="src\Rabbit\Renderer\GraphicsContext.cpp" />
   </ItemGroup>
 </Project>

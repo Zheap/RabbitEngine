@@ -9,18 +9,18 @@ namespace Rabbit {
     {
         switch (type)
         {
-            case Rabbit::ShaderDataType::None:      return GL_FLOAT;
-            case Rabbit::ShaderDataType::Float:     return GL_FLOAT;
-            case Rabbit::ShaderDataType::Float2:    return GL_FLOAT;
-            case Rabbit::ShaderDataType::Float3:    return GL_FLOAT;
-            case Rabbit::ShaderDataType::Float4:    return GL_FLOAT;
-            case Rabbit::ShaderDataType::Mat3:      return GL_FLOAT;
-            case Rabbit::ShaderDataType::Mat4:      return GL_FLOAT;
-            case Rabbit::ShaderDataType::Int:       return GL_INT;
-            case Rabbit::ShaderDataType::Int2:      return GL_INT;
-            case Rabbit::ShaderDataType::Int3:      return GL_INT;
-            case Rabbit::ShaderDataType::Int4:      return GL_INT;
-            case Rabbit::ShaderDataType::Bool:      return GL_BOOL;
+            case ShaderDataType::None:      return GL_FLOAT;
+            case ShaderDataType::Float:     return GL_FLOAT;
+            case ShaderDataType::Float2:    return GL_FLOAT;
+            case ShaderDataType::Float3:    return GL_FLOAT;
+            case ShaderDataType::Float4:    return GL_FLOAT;
+            case ShaderDataType::Mat3:      return GL_FLOAT;
+            case ShaderDataType::Mat4:      return GL_FLOAT;
+            case ShaderDataType::Int:       return GL_INT;
+            case ShaderDataType::Int2:      return GL_INT;
+            case ShaderDataType::Int3:      return GL_INT;
+            case ShaderDataType::Int4:      return GL_INT;
+            case ShaderDataType::Bool:      return GL_BOOL;
         }
     }
 

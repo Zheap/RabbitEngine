@@ -144,10 +144,18 @@ namespace Rabbit {
         if (in)
         {
             in.seekg(0, std::ios::end);
-            result.resize(in.tellg());
-            in.seekg(0, std::ios::beg);
-            in.read(&result[0], result.size());
-            in.close();
+            size_t size = in.tellg();
+            if (size != -1)
+            {
+                result.resize(in.tellg());
+                in.seekg(0, std::ios::beg);
+                in.read(&result[0], result.size());
+                in.close();
+            }
+            else
+            {
+                RB_CORE_ERROR("Could not open file '{0}'", filepath);
+            }
         }
         else
         {
@@ -194,9 +202,9 @@ namespace Rabbit {
         {
             GLenum type = kv.first;
             const std::string& source = kv.second;
-            
+
             GLuint shader = glCreateShader(type);
-            
+
             const GLchar* souceCstr = source.c_str();
             glShaderSource(shader, 1, &souceCstr, 0);
 

@@ -2,6 +2,8 @@
 
 // For use by Rabbit applications
 
+#include "Rabbit/Core/Core.h"
+
 #include "Rabbit/Core/Application.h"
 #include "Rabbit/Core/Log.h"
 #include "Rabbit/Core/Layer.h"

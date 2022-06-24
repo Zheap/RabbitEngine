@@ -609,6 +609,7 @@
     <ClCompile Include="src\Rabbit\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Rabbit\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Rabbit\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\RenderCommand.cpp" />

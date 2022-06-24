@@ -13,8 +13,10 @@ namespace Rabbit
 
     Application::Application()
     {
+        RB_PROFILE_FUNCTION();
+
         RB_CORE_ASSERT(!s_Instance, "Application already exists!")
-        s_Instance = this;
+            s_Instance = this;
 
         m_Window = std::unique_ptr<Window>(Window::Create());
         m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
@@ -26,10 +28,21 @@ namespace Rabbit
         PushOverLay(m_ImGuiLayer);
     }
 
+    Application::~Application()
+    {
+        RB_PROFILE_FUNCTION();
+
+        Renderer::Shutdown();
+    }
+
     void Application::Run()
     {
+        RB_PROFILE_FUNCTION();
+
         while (m_Running)
         {
+            RB_PROFILE_SCOPE("RunLoop");
+
             float time = (float)glfwGetTime();
             Timestep timestep = time - m_LastFrameTime;
             m_LastFrameTime = time;
@@ -42,12 +55,20 @@ namespace Rabbit
             */
             if (!m_Minimized)
             {
-                for (Layer* layer : m_LayerStack)
-                    layer->OnUpdate(timestep);
+                {
+                    RB_PROFILE_SCOPE("LayerStack OnUpdate");
+
+                    for (Layer* layer : m_LayerStack)
+                        layer->OnUpdate(timestep);
+                }
 
                 m_ImGuiLayer->Begin();
-                for (Layer* layer : m_LayerStack)
-                    layer->OnImGuiRender();
+                {
+                    RB_PROFILE_SCOPE("LayerStack OnImGuiRender");
+
+                    for (Layer* layer : m_LayerStack)
+                        layer->OnImGuiRender();
+                }
                 m_ImGuiLayer->End();
             }
 
@@ -57,6 +78,8 @@ namespace Rabbit
 
     void Application::OnEvent(Event& e)
     {
+        RB_PROFILE_FUNCTION();
+
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
         dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
@@ -71,12 +94,18 @@ namespace Rabbit
 
     void Application::PushLayer(Layer* layer)
     {
+        RB_PROFILE_FUNCTION();
+
         m_LayerStack.PushLayer(layer);
+        layer->OnAttach();
     }
 
     void Application::PushOverLay(Layer* layer)
     {
+        RB_PROFILE_FUNCTION();
+
         m_LayerStack.PushOverLay(layer);
+        layer->OnAttach();
     }
 
     bool Application::OnWindowClose(WindowCloseEvent& e)
@@ -87,6 +116,8 @@ namespace Rabbit
 
     bool Application::OnWindowResize(WindowResizeEvent& e)
     {
+        RB_PROFILE_FUNCTION();
+
         if (e.GetWidth() == 0 || e.GetHeight() == 0)
         {
             m_Minimized = true;

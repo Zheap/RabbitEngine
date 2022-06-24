@@ -5,13 +5,19 @@
 #include <GLFW/glfw3.h> 
 
 namespace Rabbit {
+
     OpenGLContext::OpenGLContext(GLFWwindow* windowHandle)
         : m_WindowHandle(windowHandle)
     {
+        RB_PROFILE_FUNCTION();
+
         RB_CORE_ASSERT(m_WindowHandle, "Window handle is null!");
     }
+
     void OpenGLContext::Init()
     {
+        RB_PROFILE_FUNCTION();
+
         glfwMakeContextCurrent(m_WindowHandle);
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         RB_CORE_ASSERT(status, "Failed to initialize Glad!");
@@ -30,8 +36,11 @@ namespace Rabbit {
         RB_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "Hazel requires at least OpenGL version 4.5!");
 #endif
     }
+
     void OpenGLContext::SwapBuffers()
     {
+        RB_PROFILE_FUNCTION();
+
         glfwSwapBuffers(m_WindowHandle);
     }
 }

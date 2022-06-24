@@ -13,23 +13,22 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
+    RB_PROFILE_FUNCTION();
+
     m_CheckedboardTexture = Rabbit::Texture2D::Create("assets/textures/Checkerboard.png");
 }
 
 void Sandbox2D::OnDetach()
 {
-
+    RB_PROFILE_FUNCTION();
 }
 
 void Sandbox2D::OnUpdate(Rabbit::Timestep ts)
 {
     RB_PROFILE_FUNCTION();
 
-    {
-        // OnUpdate
-        RB_PROFILE_SCOPE("CameraController::OnUpdate");
-        m_CameraController.OnUpdate(ts);
-    }
+    // OnUpdate
+    m_CameraController.OnUpdate(ts);
 
     // Render
     {

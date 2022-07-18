@@ -27,14 +27,14 @@ namespace Rabbit {
 #define RB_CORE_INFO(...)       ::Rabbit::Log::GetCoreLogger()->info(__VA_ARGS__)
 #define RB_CORE_WARN(...)       ::Rabbit::Log::GetCoreLogger()->warn(__VA_ARGS__)
 #define RB_CORE_ERROR(...)      ::Rabbit::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define RB_CORE_FATAL(...)      ::Rabbit::Log::GetCoreLogger()->critical(__VA_ARGS__)
+#define RB_CORE_CRITICAL(...)   ::Rabbit::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
 // Client log macros
 #define RB_TRACE(...)           ::Rabbit::Log::GetClientLogger()->trace(__VA_ARGS__)
 #define RB_INFO(...)            ::Rabbit::Log::GetClientLogger()->info(__VA_ARGS__)
 #define RB_WARN(...)            ::Rabbit::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define RB_ERROR(...)           ::Rabbit::Log::GetClientLogger()->error(__VA_ARGS__)
-#define RB_FATAL(...)           ::Rabbit::Log::GetClientLogger()->critical(__VA_ARGS__)
+#define RB_CRITICAL(...)        ::Rabbit::Log::GetClientLogger()->critical(__VA_ARGS__)
 
 
 

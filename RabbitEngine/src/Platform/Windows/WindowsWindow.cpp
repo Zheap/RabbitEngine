@@ -49,7 +49,7 @@ namespace Rabbit {
             RB_PROFILE_SCOPE("glfwInit");
 
             int success = glfwInit();
-            RB_CORE_ASSERT(success, "Could not intialize GLFW!");
+            RB_CORE_ASSERT(success, "Could not initialize GLFW!");
             glfwSetErrorCallback(GLFWErrorCallback);
         }
 

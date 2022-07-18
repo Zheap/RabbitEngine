@@ -1,10 +1,10 @@
--- premake5.lua
--- ÅäÖÃµÄ¹¤×÷ÇøÓòÊÇÈ«¾ÖµÄ£¬Í¨ÓÃÅäÖÃ
-workspace "RabbitEngine"		-- ÉèÖÃ¹¤×÷ÇøÄ¿Â¼
-    architecture "x64"			-- ÉèÖÃÏîÄ¿Ê¹ÓÃµÄ¼Ü¹¹
-    startproject "Sandbox"		-- ÉèÖÃÄ¬ÈÏÆô¶¯ÏîÄ¿
+ï»¿-- premake5.lua
+-- é…ç½®çš„å·¥ä½œåŒºåŸŸæ˜¯å…¨å±€çš„ï¼Œé€šç”¨é…ç½®
+workspace "RabbitEngine"		-- è®¾ç½®å·¥ä½œåŒºç›®å½•
+    architecture "x64"			-- è®¾ç½®é¡¹ç›®ä½¿ç”¨çš„æ¶æ„
+    startproject "Sandbox"		-- è®¾ç½®é»˜è®¤å¯åŠ¨é¡¹ç›®
 
-    configurations				-- ÅäÖÃ£¬½â¾ö·½°¸Æ½Ì¨
+    configurations				-- é…ç½®ï¼Œè§£å†³æ–¹æ¡ˆå¹³å°
     {
         "Debug",
         "Release",
@@ -16,8 +16,8 @@ workspace "RabbitEngine"		-- ÉèÖÃ¹¤×÷ÇøÄ¿Â¼
         "MultiProcessorCompile"
     }
 
--- ÅäÖÃÊä³öÄ¿Â¼£¬cfgÊÇÉÏÃæµÄconfigurationsµÄËõĞ´
--- Æ´½ÓÄ¿Â¼ÀàËÆ£ºDebug-windows-x86_64
+-- é…ç½®è¾“å‡ºç›®å½•ï¼Œcfgæ˜¯ä¸Šé¢çš„configurationsçš„ç¼©å†™
+-- æ‹¼æ¥ç›®å½•ç±»ä¼¼ï¼šDebug-windows-x86_64
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
@@ -36,21 +36,21 @@ group "Dependencies"
 group ""
 
 
--- ÅäÖÃÒ»¸ö¶¯Ì¬¿âÏîÄ¿£ºRabbitEngine
+-- é…ç½®ä¸€ä¸ªåŠ¨æ€åº“é¡¹ç›®ï¼šRabbitEngine
 project "RabbitEngine"
-    location "RabbitEngine"		-- ÏîÄ¿¸ùÄ¿Â¼
-    kind "StaticLib"			-- ÏîÄ¿ÀàĞÍ
+    location "RabbitEngine"		-- é¡¹ç›®æ ¹ç›®å½•
+    kind "StaticLib"			-- é¡¹ç›®ç±»å‹
     language "C++"
-    cppdialect "C++17"				-- Ê¹ÓÃC++ 17±ê×¼
+    cppdialect "C++17"				-- ä½¿ç”¨C++ 17æ ‡å‡†
     staticruntime "on"
 
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")		-- Éú³ÉµÄÄ¿±êÎÄ¼ş¼Ğ bin/Debug-windows-x86_64/RabbitEngine, prjÊÇprojectµÄËõĞ´
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")		-- ÖĞ¼äÁÙÊ±ÎÄ¼şÉú³ÉÄ¿Â¼
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")		-- ç”Ÿæˆçš„ç›®æ ‡æ–‡ä»¶å¤¹ bin/Debug-windows-x86_64/RabbitEngine, prjæ˜¯projectçš„ç¼©å†™
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")		-- ä¸­é—´ä¸´æ—¶æ–‡ä»¶ç”Ÿæˆç›®å½•
 
     pchheader "rbpch.h"
     pchsource "RabbitEngine/src/rbpch.cpp"
 
--- µ±Ç°ÏîÄ¿Ô´ÂëÄ¿Â¼
+-- å½“å‰é¡¹ç›®æºç ç›®å½•
     files
     {
         "%{prj.name}/src/**.h",
@@ -63,10 +63,11 @@ project "RabbitEngine"
 
     defines
     {
-        "_CRT_SECURE_NO_WARNINGS"
+        "_CRT_SECURE_NO_WARNINGS",
+        "GLFW_INCLUDE_NONE"
     }
 
--- µ±Ç°ÏîÄ¿¸½¼ÓµÄ°üº¬¿âÄ¿Â¼
+-- å½“å‰é¡¹ç›®é™„åŠ çš„åŒ…å«åº“ç›®å½•
     includedirs
     {
         "%{prj.name}/src",
@@ -86,19 +87,17 @@ project "RabbitEngine"
         "opengl32.lib"
     }
 
-    filter "system:windows"				-- ÉèÖÃÕë¶ÔWindowsÆ½Ì¨µÄ¹ıÂËÆ÷
-        systemversion "latest"			-- Ê¹ÓÃ×îĞÂ°æ±¾µÄÏµÍ³sdk ±ÈÈçWindows 10.0
+    filter "system:windows"				-- è®¾ç½®é’ˆå¯¹Windowså¹³å°çš„è¿‡æ»¤å™¨
+        systemversion "latest"			-- ä½¿ç”¨æœ€æ–°ç‰ˆæœ¬çš„ç³»ç»Ÿsdk æ¯”å¦‚Windows 10.0
 
-        defines							-- Ìí¼ÓWindowsÆ½Ì¨ÉÏµÄÔ¤´¦Àí¶¨Òå
+        defines							-- æ·»åŠ Windowså¹³å°ä¸Šçš„é¢„å¤„ç†å®šä¹‰
         {
-            "RB_BUILD_DLL",
-            "GLFW_INCLUDE_NONE",
         }
 
-    filter "configurations:Debug"		-- ÅäÖÃDebugµÄ¹ıÂËÆ÷
-        defines "RB_DEBUG"				-- Ìí¼ÓDebugµÄÔ¤±àÒë¶¨Òå
+    filter "configurations:Debug"		-- é…ç½®Debugçš„è¿‡æ»¤å™¨
+        defines "RB_DEBUG"				-- æ·»åŠ Debugçš„é¢„ç¼–è¯‘å®šä¹‰
         runtime "Debug"
-        symbols "on"					-- ÉèÖÃ´ËºêÓĞĞ§
+        symbols "on"					-- è®¾ç½®æ­¤å®æœ‰æ•ˆ
         
     filter "configurations:Release"
         defines "RB_RELEASE"
@@ -134,7 +133,7 @@ project "Sandbox"
         "%{IncludeDir.glm}"
     }
 
--- ÉèÖÃ´ËÏîÄ¿ÒıÓÃRabbitEngine
+-- è®¾ç½®æ­¤é¡¹ç›®å¼•ç”¨RabbitEngine
     links
     {
         "RabbitEngine"

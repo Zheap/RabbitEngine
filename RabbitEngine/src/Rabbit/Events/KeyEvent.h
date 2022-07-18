@@ -4,7 +4,7 @@
 
 namespace Rabbit {
 
-    class RABBIT_API KeyEvent : public Event
+    class KeyEvent : public Event
     {
     public:
         int GetKeyCode() const { return m_KeyCode; }
@@ -18,7 +18,7 @@ namespace Rabbit {
         int m_KeyCode;
     };
 
-    class RABBIT_API KeyPressedEvent : public KeyEvent
+    class KeyPressedEvent : public KeyEvent
     {
     public:
         KeyPressedEvent(int keycode, int repeatCount)
@@ -39,7 +39,7 @@ namespace Rabbit {
         int m_RepeatCount;
     };
 
-    class RABBIT_API KeyReleasedEvent : public KeyEvent
+    class KeyReleasedEvent : public KeyEvent
     {
     public:
         KeyReleasedEvent(int keycode)
@@ -55,7 +55,7 @@ namespace Rabbit {
         EVENT_CLASS_TYPE(KeyReleased)
     };
 
-    class RABBIT_API KeyTypedEvent : public KeyEvent
+    class KeyTypedEvent : public KeyEvent
     {
     public:
         KeyTypedEvent(int keycode)

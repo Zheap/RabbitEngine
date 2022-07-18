@@ -7,7 +7,7 @@
 
 namespace Rabbit {
 
-    class RABBIT_API LayerStack
+    class LayerStack
     {
     public:
         LayerStack();

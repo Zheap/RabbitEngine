@@ -7,7 +7,7 @@
 
 namespace Rabbit {
 
-    class RABBIT_API Log
+    class Log
     {
     public:
         static void Init();

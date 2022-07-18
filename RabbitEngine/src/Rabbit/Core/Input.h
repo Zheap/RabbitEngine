@@ -4,7 +4,7 @@
 
 namespace Rabbit {
 
-    class RABBIT_API Input
+    class Input
     {
     protected:
         Input() = default;

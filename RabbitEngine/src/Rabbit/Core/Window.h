@@ -22,7 +22,7 @@ namespace Rabbit {
     };
 
     // Interface representing a desktop desktop based Window
-    class RABBIT_API Window
+    class Window
     {
     public:
         using EventCallbackFn = std::function<void(Event&)>;

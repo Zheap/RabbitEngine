@@ -24,7 +24,7 @@ private:
 
     Rabbit::Ref<Rabbit::Texture2D> m_CheckedboardTexture;
 
-    glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f};
+    glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 
     ParticleProps m_Particle;
     ParticleSystem m_ParticleSystem;

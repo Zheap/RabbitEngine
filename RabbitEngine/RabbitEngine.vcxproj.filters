@@ -19,6 +19,9 @@
     <Filter Include="src\Rabbit\Core">
       <UniqueIdentifier>{C84080F0-34CC-EDB4-3DDD-70A9A9E749B5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Rabbit\Debug">
+      <UniqueIdentifier>{E6B49400-D2AD-B352-FBDF-98D7E737935E}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Rabbit\Events">
       <UniqueIdentifier>{54A4B516-C0BA-B3AC-0932-3FCE75878434}</UniqueIdentifier>
     </Filter>
@@ -114,6 +117,9 @@
     <ClInclude Include="src\Rabbit\Core\Window.h">
       <Filter>src\Rabbit\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rabbit\Debug\Instrumentor.h">
+      <Filter>src\Rabbit\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="src\Rabbit\Events\ApplicationEvent.h">
       <Filter>src\Rabbit\Events</Filter>
     </ClInclude>
@@ -145,6 +151,9 @@
       <Filter>src\Rabbit\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Rabbit\Renderer\Renderer.h">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rabbit\Renderer\Renderer2D.h">
       <Filter>src\Rabbit\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Rabbit\Renderer\RendererAPI.h">
@@ -1410,8 +1419,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rabbit\Renderer\Renderer2D.h" />
-    <ClInclude Include="src\Rabbit\Debug\Instrumentor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1459,6 +1466,9 @@
     <ClCompile Include="src\Rabbit\Renderer\Buffer.cpp">
       <Filter>src\Rabbit\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Rabbit\Renderer\GraphicsContext.cpp">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Rabbit\Renderer\OrthographicCamera.cpp">
       <Filter>src\Rabbit\Renderer</Filter>
     </ClCompile>
@@ -1469,6 +1479,9 @@
       <Filter>src\Rabbit\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Rabbit\Renderer\Renderer.cpp">
+      <Filter>src\Rabbit\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rabbit\Renderer\Renderer2D.cpp">
       <Filter>src\Rabbit\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Rabbit\Renderer\RendererAPI.cpp">
@@ -1489,7 +1502,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rabbit\Renderer\Renderer2D.cpp" />
-    <ClCompile Include="src\Rabbit\Renderer\GraphicsContext.cpp" />
   </ItemGroup>
 </Project>

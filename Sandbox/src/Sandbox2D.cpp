@@ -18,6 +18,11 @@ void Sandbox2D::OnAttach()
     m_CheckedboardTexture = Rabbit::Texture2D::Create("assets/textures/Checkerboard.png");
     m_SpriteSheet = Rabbit::Texture2D::Create("assets/game/textures/RPGpack_sheet_2X.png");
 
+    m_TextureStairs = Rabbit::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 7, 6 }, { 128, 128 });
+    m_TextureBarrel = Rabbit::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 8, 2 }, { 128, 128 });
+    m_TextureTree = Rabbit::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 2, 1 }, { 128, 128 }, { 1, 2 });
+
+
     // Init here
     m_Particle.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
     m_Particle.ColorEnd = { 254 / 255.0f, 109 / 255.0f, 41 / 255.0f, 1.0f };
@@ -97,7 +102,9 @@ void Sandbox2D::OnUpdate(Rabbit::Timestep ts)
     m_ParticleSystem.OnRender(m_CameraController.GetCamera());
 
     Rabbit::Renderer2D::BeginScene(m_CameraController.GetCamera());
-    Rabbit::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_SpriteSheet);
+    Rabbit::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureStairs);
+    Rabbit::Renderer2D::DrawQuad({ 1.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureBarrel);
+    Rabbit::Renderer2D::DrawQuad({ -1.0f, 0.0f, 0.5f }, { 1.0f, 2.0f }, m_TextureTree);
     Rabbit::Renderer2D::EndScene();
 }
 

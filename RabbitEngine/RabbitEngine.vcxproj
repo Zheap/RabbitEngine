@@ -173,6 +173,7 @@
     <ClInclude Include="src\Rabbit\Renderer\Renderer2D.h" />
     <ClInclude Include="src\Rabbit\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Rabbit\Renderer\Shader.h" />
+    <ClInclude Include="src\Rabbit\Renderer\SubTexture2D.h" />
     <ClInclude Include="src\Rabbit\Renderer\Texture.h" />
     <ClInclude Include="src\Rabbit\Renderer\VertexArray.h" />
     <ClInclude Include="src\rbpch.h" />
@@ -617,6 +618,7 @@
     <ClCompile Include="src\Rabbit\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Rabbit\Renderer\SubTexture2D.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\Texture.cpp" />
     <ClCompile Include="src\Rabbit\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\rbpch.cpp">

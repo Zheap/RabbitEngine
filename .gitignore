@@ -2,3 +2,6 @@ bin-int/
 bin/
 .vs/
 *.user
+*.sln
+*.vcxproj
+*.filters

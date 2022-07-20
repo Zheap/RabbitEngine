@@ -28,11 +28,13 @@ namespace Rabbit {
         const OrthographicCamera& GetCamera() const { return m_Camera; }
 
         float GetZoomLevel() const { return m_ZoomLevel; }
-        void SetZoomLevel(float level) { m_ZoomLevel = level; }
+        void SetZoomLevel(float level) { m_ZoomLevel = level; CaculateView(); }
 
         const OrthographicCameraBounds& GetBounds() const { return m_Bounds; }
 
     private:
+        void CaculateView();
+
         bool OnMouseScrolled(MouseScrolledEvent& e);
         bool OnWindowResized(WindowResizeEvent& e);
 

@@ -108,6 +108,11 @@ namespace Rabbit
         layer->OnAttach();
     }
 
+    void Application::Close()
+    {
+        m_Running = false;
+    }
+
     bool Application::OnWindowClose(WindowCloseEvent& e)
     {
         m_Running = false;

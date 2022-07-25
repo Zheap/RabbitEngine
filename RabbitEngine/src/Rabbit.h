@@ -24,6 +24,7 @@
 
 #include "Rabbit/Renderer/Buffer.h"
 #include "Rabbit/Renderer/Shader.h"
+#include "Rabbit/Renderer/Framebuffer.h"
 #include "Rabbit/Renderer/Texture.h"
 #include "Rabbit/Renderer/SubTexture2D.h"
 #include "Rabbit/Renderer/VertexArray.h"

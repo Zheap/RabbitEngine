@@ -33,6 +33,7 @@ void Sandbox2D::OnAttach()
     RB_PROFILE_FUNCTION();
 
     m_CheckedboardTexture = Rabbit::Texture2D::Create("assets/textures/Checkerboard.png");
+    /*
     m_SpriteSheet = Rabbit::Texture2D::Create("assets/game/textures/RPGpack_sheet_2X.png");
 
     m_TextureStairs = Rabbit::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 0, 11 }, { 128, 128 });
@@ -54,6 +55,12 @@ void Sandbox2D::OnAttach()
     m_Particle.Position = { 0.0f, 0.0f };
 
     m_CameraController.SetZoomLevel(5.0f);
+    */
+
+    Rabbit::FramebufferSpecification fbspec;
+    fbspec.Width = 1280;
+    fbspec.Height = 720;
+    m_Framebuffer = Rabbit::Framebuffer::Create(fbspec);
 }
 
 void Sandbox2D::OnDetach()
@@ -72,6 +79,7 @@ void Sandbox2D::OnUpdate(Rabbit::Timestep ts)
     Rabbit::Renderer2D::ResetStats();
     {
         RB_PROFILE_SCOPE("Renderer Prep");
+        m_Framebuffer->Bind();
         Rabbit::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
         Rabbit::RenderCommand::Clear();
     }
@@ -103,8 +111,11 @@ void Sandbox2D::OnUpdate(Rabbit::Timestep ts)
             }
         }
         Rabbit::Renderer2D::EndScene();
+        m_Framebuffer->Unbind();
     }
 #endif
+
+    /* ParticalSystem
 
     if (Rabbit::Input::IsMouseButtonPressed(RB_MOUSE_BUTTON_LEFT))
     {
@@ -123,6 +134,8 @@ void Sandbox2D::OnUpdate(Rabbit::Timestep ts)
 
     m_ParticleSystem.OnUpdate(ts);
     m_ParticleSystem.OnRender(m_CameraController.GetCamera());
+
+    */
 
     //Rabbit::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
@@ -228,8 +241,8 @@ void Sandbox2D::OnImGuiRender()
 
     ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
 
-    uint32_t textureID = m_CheckedboardTexture->GetRendererID();
-    ImGui::Image((void*)textureID, ImVec2{256.0f, 256.0f});
+    uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+    ImGui::Image((void*)textureID, ImVec2{ 1280.0f, 720.0f });
 
     ImGui::End();
 

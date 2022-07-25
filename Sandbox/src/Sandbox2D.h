@@ -26,6 +26,8 @@ private:
     Rabbit::Ref<Rabbit::Texture2D> m_SpriteSheet;
     Rabbit::Ref<Rabbit::SubTexture2D> m_TextureStairs, m_TextureBarrel, m_TextureTree;
 
+    Rabbit::Ref<Rabbit::Framebuffer> m_Framebuffer;
+
     glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 
     ParticleProps m_Particle;

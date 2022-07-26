@@ -14,7 +14,7 @@ namespace Rabbit {
     class Application
     {
     public:
-        Application();
+        Application(const std::string& name = "Rabbit Engine App");
         virtual ~Application();
         
         void Run();

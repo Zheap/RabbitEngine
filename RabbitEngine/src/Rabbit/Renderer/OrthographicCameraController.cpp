@@ -70,6 +70,12 @@ namespace Rabbit {
         dispatcher.Dispatch<WindowResizeEvent>(RB_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
     }
 
+    void OrthographicCameraController::onResize(float width, float height)
+    {
+        m_AspectRatio = width / height;
+        CaculateView();
+    }
+
     void OrthographicCameraController::CaculateView()
     {
         m_Bounds = { -m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel };
@@ -89,9 +95,7 @@ namespace Rabbit {
     bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
     {
         RB_PROFILE_FUNCTION();
-
-        m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
-        CaculateView();
+        onResize((float)e.GetWidth(), (float)e.GetHeight());
         return false;
     }
 

@@ -1,10 +1,10 @@
 ﻿-- premake5.lua
 -- 配置的工作区域是全局的，通用配置
-workspace "RabbitEngine"		-- 设置工作区目录
-    architecture "x64"			-- 设置项目使用的架构
-    startproject "Sandbox"		-- 设置默认启动项目
+workspace "RabbitEngine"        -- 设置工作区目录
+    architecture "x64"          -- 设置项目使用的架构
+    startproject "Rabbitnut"    -- 设置默认启动项目
 
-    configurations				-- 配置，解决方案平台
+    configurations              -- 配置，解决方案平台
     {
         "Debug",
         "Release",
@@ -111,6 +111,54 @@ project "RabbitEngine"
         
 project "Sandbox"
     location "Sandbox"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++17"
+    staticruntime "on"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    files
+    {
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp"
+    }
+
+    includedirs 
+    {
+        "RabbitEngine/vendor/spdlog/include",
+        "RabbitEngine/src",
+        "RabbitEngine/vendor",
+        "%{IncludeDir.glm}"
+    }
+
+-- 设置此项目引用RabbitEngine
+    links
+    {
+        "RabbitEngine"
+    }
+
+    filter "system:windows"
+        systemversion "latest"
+
+    filter "configurations:Debug"
+        defines "RB_DEBUG"
+        runtime "Debug"
+        symbols "on"
+        
+    filter "configurations:Release"
+        defines "RB_RELEASE"
+        runtime "Release"
+        symbols "on"
+        
+    filter "configurations:Dist"
+        defines "RB_DIST"
+        runtime "Release"
+        symbols "on"
+
+project "Rabbitnut"
+    location "Rabbitnut"
     kind "ConsoleApp"
     language "C++"
     cppdialect "C++17"

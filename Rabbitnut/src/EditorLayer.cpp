@@ -35,7 +35,8 @@ namespace Rabbit {
         RB_PROFILE_FUNCTION();
 
         // OnUpdate
-        m_CameraController.OnUpdate(ts);
+        if (m_ViewportFocused && m_ViewportHovered)
+            m_CameraController.OnUpdate(ts);
 
         // Render
         Rabbit::Renderer2D::ResetStats();
@@ -158,6 +159,15 @@ namespace Rabbit {
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
         ImGui::Begin("Viewport");
+
+        m_ViewportFocused = ImGui::IsWindowFocused();
+        m_ViewportHovered = ImGui::IsWindowHovered();
+
+        RB_CORE_WARN("Focused: {0}", m_ViewportFocused);
+        RB_CORE_WARN("Hovered: {0}", m_ViewportHovered);
+
+        Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
+
         ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
         if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize))
         {

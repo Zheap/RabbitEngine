@@ -46,6 +46,7 @@ namespace Rabbit {
     class Event
     {
     public:
+        virtual ~Event() = default;
         bool Handled = false;
         virtual EventType GetEventType() const = 0;
         virtual const char* GetName() const = 0;

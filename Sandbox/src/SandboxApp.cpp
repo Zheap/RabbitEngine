@@ -140,7 +140,7 @@ public:
         m_ChernoLogoTexture = Rabbit::Texture2D::Create("assets/textures/ChernoLogo.png");
 
         textureShader->Bind();
-        textureShader->SetInt("u_Texture", 0);  // texture slot
+        textureShader->SetInt("u_Textures", 0);  // texture slot
     }
 
     void OnUpdate(Rabbit::Timestep ts) override

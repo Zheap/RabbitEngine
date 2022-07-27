@@ -90,7 +90,7 @@ namespace Rabbit {
 
         s_Data.TextureShader = Shader::Create("assets/shaders/Texture.glsl");
         s_Data.TextureShader->Bind();
-        s_Data.TextureShader->SetIntArray("u_Texture", samplers, s_Data.MaxTextureSlots);
+        s_Data.TextureShader->SetIntArray("u_Textures", samplers, s_Data.MaxTextureSlots);
 
         // Set all texture slots to 0
         s_Data.TextureSlots[0] = s_Data.WhiteTexture;
@@ -104,6 +104,8 @@ namespace Rabbit {
     void Renderer2D::Shutdown()
     {
         RB_PROFILE_FUNCTION();
+
+        delete[] s_Data.QuadVertexBufferBase;
     }
 
     void Renderer2D::BeginScene(const OrthographicCamera& camera)
@@ -130,6 +132,8 @@ namespace Rabbit {
 
     void Renderer2D::Flush()
     {
+        if (s_Data.QuadIndexCount == 0)
+            return;
         // Bind Textures
         for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
             s_Data.TextureSlots[i]->Bind(i);
@@ -206,7 +210,6 @@ namespace Rabbit {
         RB_PROFILE_FUNCTION();
 
         constexpr size_t quadVertexCount = 4;
-        constexpr glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
         constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 
         if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
@@ -226,6 +229,8 @@ namespace Rabbit {
 
         if (textureIndex == 0.0f)
         {
+            if (s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots)
+                FlushAndReset();
             textureIndex = (float)s_Data.TextureSlotIndex;
             s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;
             s_Data.TextureSlotIndex++;
@@ -237,7 +242,7 @@ namespace Rabbit {
         for (size_t i = 0; i < quadVertexCount; ++i)
         {
             s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[i];
-            s_Data.QuadVertexBufferPtr->Color = color;
+            s_Data.QuadVertexBufferPtr->Color = tintColor;
             s_Data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
             s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
             s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
@@ -293,6 +298,8 @@ namespace Rabbit {
 
         if (textureIndex == 0.0f)
         {
+            if (s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots)
+                FlushAndReset();
             textureIndex = (float)s_Data.TextureSlotIndex;
             s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;
             s_Data.TextureSlotIndex++;
@@ -378,7 +385,6 @@ namespace Rabbit {
         RB_PROFILE_FUNCTION();
 
         constexpr size_t quadVertexCount = 4;
-        constexpr glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
         constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 
         if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
@@ -410,7 +416,7 @@ namespace Rabbit {
         for (size_t i = 0; i < quadVertexCount; ++i)
         {
             s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[i];
-            s_Data.QuadVertexBufferPtr->Color = color;
+            s_Data.QuadVertexBufferPtr->Color = tintColor;
             s_Data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
             s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
             s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;

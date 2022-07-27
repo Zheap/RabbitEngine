@@ -163,9 +163,6 @@ namespace Rabbit {
         m_ViewportFocused = ImGui::IsWindowFocused();
         m_ViewportHovered = ImGui::IsWindowHovered();
 
-        RB_CORE_WARN("Focused: {0}", m_ViewportFocused);
-        RB_CORE_WARN("Hovered: {0}", m_ViewportHovered);
-
         Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
 
         ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();

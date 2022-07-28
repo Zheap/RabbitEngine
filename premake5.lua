@@ -27,6 +27,7 @@ IncludeDir["Glad"] = "RabbitEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "RabbitEngine/vendor/imgui"
 IncludeDir["glm"] = "RabbitEngine/vendor/glm"
 IncludeDir["stb_image"] = "RabbitEngine/vendor/stb_image"
+IncludeDir["entt"] = "RabbitEngine/vendor/entt/include"
 
 
 group "Dependencies"
@@ -58,7 +59,7 @@ project "RabbitEngine"
         "%{prj.name}/vendor/stb_image/**.h",
         "%{prj.name}/vendor/stb_image/**.cpp",
         "%{prj.name}/vendor/glm/glm/**.hpp",
-        "%{prj.name}/vendor/glm/glm/**.inl"
+        "%{prj.name}/vendor/glm/glm/**.inl",
     }
 
     defines
@@ -77,6 +78,7 @@ project "RabbitEngine"
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
         "%{IncludeDir.stb_image}",
+        "%{IncludeDir.entt}"
     }
 
     links
@@ -130,7 +132,8 @@ project "Sandbox"
         "RabbitEngine/vendor/spdlog/include",
         "RabbitEngine/src",
         "RabbitEngine/vendor",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.entt}"
     }
 
 -- 设置此项目引用RabbitEngine
@@ -178,7 +181,8 @@ project "Rabbitnut"
         "RabbitEngine/vendor/spdlog/include",
         "RabbitEngine/src",
         "RabbitEngine/vendor",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.entt}"
     }
 
 -- 设置此项目引用RabbitEngine

@@ -17,12 +17,21 @@ namespace Rabbit {
     {
         RB_PROFILE_FUNCTION();
 
-        m_CheckedboardTexture = Rabbit::Texture2D::Create("assets/textures/Checkerboard.png");
+        m_CheckedboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
 
-        Rabbit::FramebufferSpecification fbspec;
+        FramebufferSpecification fbspec;
         fbspec.Width = 1280;
         fbspec.Height = 720;
-        m_Framebuffer = Rabbit::Framebuffer::Create(fbspec);
+        m_Framebuffer = Framebuffer::Create(fbspec);
+
+        m_ActiveScene = CreateRef<Scene>();
+
+        auto square = m_ActiveScene->CreateEntity();
+
+        m_ActiveScene->Reg().emplace<TransformComponent>(square);
+        m_ActiveScene->Reg().emplace<SpriteRendererComponent>(square, glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
+
+        m_SquareEntity = square;
     }
 
     void EditorLayer::OnDetach()
@@ -30,7 +39,7 @@ namespace Rabbit {
         RB_PROFILE_FUNCTION();
     }
 
-    void EditorLayer::OnUpdate(Rabbit::Timestep ts)
+    void EditorLayer::OnUpdate(Timestep ts)
     {
         RB_PROFILE_FUNCTION();
 
@@ -39,42 +48,17 @@ namespace Rabbit {
             m_CameraController.OnUpdate(ts);
 
         // Render
-        Rabbit::Renderer2D::ResetStats();
-        {
-            RB_PROFILE_SCOPE("Renderer Prep");
-            m_Framebuffer->Bind();
-            Rabbit::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
-            Rabbit::RenderCommand::Clear();
-        }
+        Renderer2D::ResetStats();
+        m_Framebuffer->Bind();
+        RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+        RenderCommand::Clear();
 
-        {
-            RB_PROFILE_SCOPE("Renderer Draw");
+        Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-            static float rotation = 0.0f;
-            rotation += ts * 50.0f;
+        m_ActiveScene->OnUpdate(ts);
 
-            Rabbit::Renderer2D::BeginScene(m_CameraController.GetCamera());
-
-            Rabbit::Renderer2D::DrawRotationQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, glm::radians(-45.0f), { 0.8f, 0.2f, 0.3f, 1.0f });
-            Rabbit::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-            Rabbit::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, m_SquareColor);
-            Rabbit::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 20.0f, 20.0f }, m_CheckedboardTexture, 10.0f);
-            Rabbit::Renderer2D::DrawRotationQuad({ -2.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, glm::radians(rotation), m_CheckedboardTexture, 20.0f);
-
-            Rabbit::Renderer2D::EndScene();
-
-            Rabbit::Renderer2D::BeginScene(m_CameraController.GetCamera());
-            for (float y = -5.0f; y < 5.0f; y += 0.5f)
-            {
-                for (float x = -5.0f; x < 5.0f; x += 0.5f)
-                {
-                    glm::vec4 color = { (x + 5.0f) / 10.0f, 0.4f, (y + 5.0f) / 10.0f, 0.7f };
-                    Rabbit::Renderer2D::DrawQuad({ x, y }, { 0.45f, 0.45f }, color);
-                }
-            }
-            Rabbit::Renderer2D::EndScene();
-            m_Framebuffer->Unbind();
-        }
+        Renderer2D::EndScene();
+        m_Framebuffer->Unbind();
     }
 
     void EditorLayer::OnImGuiRender()
@@ -137,7 +121,7 @@ namespace Rabbit {
             {
                 // Disabling fullscreen would allow the window to be moved to the front of other windows,
                 // which we can't undo at the moment without finer window depth/z control.
-                if (ImGui::MenuItem("Exit")) Rabbit::Application::Get().Close();
+                if (ImGui::MenuItem("Exit")) Application::Get().Close();
 
                 ImGui::EndMenu();
             }
@@ -146,14 +130,15 @@ namespace Rabbit {
 
         ImGui::Begin("Settings");
 
-        auto stats = Rabbit::Renderer2D::GetStats();
+        auto stats = Renderer2D::GetStats();
         ImGui::Text("Renderer2D Stats: ");
         ImGui::Text("Draw Calls: %d", stats.DrawCalls);
         ImGui::Text("Quads: %d", stats.QuadCount);
         ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
         ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 
-        ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+        auto& squareColor = m_ActiveScene->Reg().get<SpriteRendererComponent>(m_SquareEntity).Color;
+        ImGui::ColorEdit3("Square Color", glm::value_ptr(squareColor));
 
         ImGui::End();
 
@@ -183,7 +168,7 @@ namespace Rabbit {
     }
 
 
-    void EditorLayer::OnEvent(Rabbit::Event& e)
+    void EditorLayer::OnEvent(Event& e)
     {
         m_CameraController.OnEvent(e);
     }

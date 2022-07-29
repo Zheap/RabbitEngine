@@ -16,6 +16,8 @@
 #include "Rabbit/Renderer/OrthographicCameraController.h"
 
 #include "Rabbit/ImGui/ImGuiLayer.h"
+#include "Rabbit/Scene/Scene.h"
+#include "Rabbit/Scene/Component.h"
 
 // -------------Renderer------------------
 #include "Rabbit/Renderer/Renderer.h"

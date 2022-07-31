@@ -17,6 +17,7 @@
 
 #include "Rabbit/ImGui/ImGuiLayer.h"
 #include "Rabbit/Scene/Scene.h"
+#include "Rabbit/Scene/Entity.h"
 #include "Rabbit/Scene/Component.h"
 
 // -------------Renderer------------------

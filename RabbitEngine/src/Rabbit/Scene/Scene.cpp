@@ -35,7 +35,7 @@ namespace Rabbit {
         if (m_Registry.all_of<TransformComponent>(entity))
             TransformComponent& transform = m_Registry.get<TransformComponent>(entity);
 
-        auto view  = m_Registry.view<TransformComponent>();
+        auto view = m_Registry.view<TransformComponent>();
         for (auto entity : view)
         {
             TransformComponent& transform = m_Registry.get<TransformComponent>(entity);
@@ -44,7 +44,7 @@ namespace Rabbit {
         auto group = m_Registry.group<TransformComponent>(entt::get<MeshComponent>);
         for (auto entity : group)
         {
-            auto&[transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
+            auto& [transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
         }
 #endif
     }
@@ -66,11 +66,36 @@ namespace Rabbit {
 
     void Scene::OnUpdate(Timestep ts)
     {
-        auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-        for (auto entity : group)
+
+        // Render 2D
+        Camera* mainCamera = nullptr;
+        glm::mat4* cameraTransform = nullptr;
         {
-            auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-            Renderer2D::DrawQuad(transform, sprite.Color);
+            auto group = m_Registry.view<TransformComponent, CameraComponent>();
+            for (auto entity : group)
+            {
+                auto& [transform, camera] = group.get<TransformComponent, CameraComponent>(entity);
+                if (camera.Primary)
+                {
+                    mainCamera = &camera.Camera;
+                    cameraTransform = &transform.Transform;
+                    break;
+                }
+            }
+        }
+
+        if (mainCamera)
+        {
+            Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
+
+            auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+            for (auto entity : group)
+            {
+                auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+                Renderer2D::DrawQuad(transform, sprite.Color);
+            }
+
+            Renderer2D::EndScene();
         }
     }
 

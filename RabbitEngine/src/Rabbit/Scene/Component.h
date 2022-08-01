@@ -2,6 +2,8 @@
 
 #include <glm/glm.hpp>
 
+#include "Rabbit/Renderer/Camera.h"
+
 namespace Rabbit {
 
     struct TagComponent
@@ -38,5 +40,16 @@ namespace Rabbit {
 
         operator glm::vec4& () { return Color; }
         operator const glm::vec4& () const { return Color; }
+    };
+
+    struct CameraComponent
+    {
+        Rabbit::Camera Camera;
+        bool Primary = true;
+
+        CameraComponent() = default;
+        CameraComponent(const CameraComponent&) = default;
+        CameraComponent(const glm::mat4& projection)
+            : Camera(projection) {}
     };
 }

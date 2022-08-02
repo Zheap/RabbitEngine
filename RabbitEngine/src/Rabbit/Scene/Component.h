@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-#include "Rabbit/Renderer/Camera.h"
+#include "Rabbit/Scene/SceneCamera.h"
 
 namespace Rabbit {
 
@@ -44,12 +44,11 @@ namespace Rabbit {
 
     struct CameraComponent
     {
-        Rabbit::Camera Camera;
+        SceneCamera Camera;
         bool Primary = true;
+        bool FixedAspectRatio = false;
 
         CameraComponent() = default;
         CameraComponent(const CameraComponent&) = default;
-        CameraComponent(const glm::mat4& projection)
-            : Camera(projection) {}
     };
 }

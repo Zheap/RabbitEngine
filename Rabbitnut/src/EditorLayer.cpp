@@ -69,6 +69,9 @@ namespace Rabbit {
         };
 
         m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraComtroller>();
+        m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraComtroller>();
+
+        m_SceneHierarchyPanel.SetContext(m_ActiveScene);
     }
 
     void EditorLayer::OnDetach()
@@ -172,6 +175,8 @@ namespace Rabbit {
             }
             ImGui::EndMenuBar();
         }
+
+        m_SceneHierarchyPanel.OnImGuiRender();
 
         ImGui::Begin("Settings");
 

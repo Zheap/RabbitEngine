@@ -37,6 +37,36 @@ namespace Rabbit {
         m_SecondCamera = m_ActiveScene->CreateEntity("Clip-Space Camera");
         auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
         cc.Primary = false;
+
+        class CameraComtroller : public ScriptableEntity
+        {
+        public:
+            void OnCreate()
+            {
+            }
+
+            void OnDestory()
+            {
+
+            }
+
+            void OnUpdate(Timestep ts)
+            {
+                auto& transform = GetComponent<TransformComponent>().Transform;
+                float speed = 5.0f;
+
+                if (Input::IsKeyPressed(RB_KEY_A))
+                    transform[3][0] -= speed * ts;
+                if (Input::IsKeyPressed(RB_KEY_D))
+                    transform[3][0] += speed * ts;
+                if (Input::IsKeyPressed(RB_KEY_W))
+                    transform[3][1] += speed * ts;
+                if (Input::IsKeyPressed(RB_KEY_S))
+                    transform[3][1] -= speed * ts;
+            }
+        };
+
+        m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraComtroller>();
     }
 
     void EditorLayer::OnDetach()
@@ -189,7 +219,6 @@ namespace Rabbit {
         ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
         m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
-        RB_WARN("Viewport size: {0}, {1}", viewportPanelSize.x, viewportPanelSize.y);
         uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
         ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
         ImGui::End();

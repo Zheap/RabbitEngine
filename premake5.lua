@@ -28,12 +28,14 @@ IncludeDir["ImGui"] = "RabbitEngine/vendor/imgui"
 IncludeDir["glm"] = "RabbitEngine/vendor/glm"
 IncludeDir["stb_image"] = "RabbitEngine/vendor/stb_image"
 IncludeDir["entt"] = "RabbitEngine/vendor/entt/include"
+IncludeDir["yaml_cpp"] = "RabbitEngine/vendor/yaml-cpp/include"
 
 
 group "Dependencies"
     include "RabbitEngine/vendor/GLFW"
     include "RabbitEngine/vendor/Glad"
     include "RabbitEngine/vendor/imgui"
+    include "RabbitEngine/vendor/yaml-cpp"
 group ""
 
 
@@ -65,7 +67,8 @@ project "RabbitEngine"
     defines
     {
         "_CRT_SECURE_NO_WARNINGS",
-        "GLFW_INCLUDE_NONE"
+        "GLFW_INCLUDE_NONE",
+        "YAML_CPP_STATIC_DEFINE"
     }
 
 -- 当前项目附加的包含库目录
@@ -78,7 +81,8 @@ project "RabbitEngine"
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
         "%{IncludeDir.stb_image}",
-        "%{IncludeDir.entt}"
+        "%{IncludeDir.entt}",
+        "%{IncludeDir.yaml_cpp}"
     }
 
     links
@@ -86,6 +90,7 @@ project "RabbitEngine"
         "GLFW",
         "Glad",
         "ImGui",
+        "yaml-cpp",
         "opengl32.lib"
     }
 

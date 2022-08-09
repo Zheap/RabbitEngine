@@ -6,6 +6,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Rabbit/Scene/SceneSerializer.h"
+
 namespace Rabbit {
 
     EditorLayer::EditorLayer()
@@ -25,6 +27,8 @@ namespace Rabbit {
         m_Framebuffer = Framebuffer::Create(fbspec);
 
         m_ActiveScene = CreateRef<Scene>();
+
+#if 0
 
         auto square = m_ActiveScene->CreateEntity("Green Square");
         square.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
@@ -74,7 +78,9 @@ namespace Rabbit {
         m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraComtroller>();
         m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraComtroller>();
 
+#endif
         m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+
     }
 
     void EditorLayer::OnDetach()
@@ -177,6 +183,19 @@ namespace Rabbit {
             {
                 // Disabling fullscreen would allow the window to be moved to the front of other windows,
                 // which we can't undo at the moment without finer window depth/z control.
+
+                if (ImGui::MenuItem("Serialize"))
+                {
+                    SceneSerializer serializer(m_ActiveScene);
+                    serializer.Serialize("assets/scenes/Example.rabbit");
+                }
+
+                if (ImGui::MenuItem("Deserialize"))
+                {
+                    SceneSerializer serializer(m_ActiveScene);
+                    serializer.Deserialize("assets/scenes/Example.rabbit");
+                }
+
                 if (ImGui::MenuItem("Exit")) Application::Get().Close();
 
                 ImGui::EndMenu();

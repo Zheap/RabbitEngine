@@ -29,6 +29,7 @@ IncludeDir["glm"] = "RabbitEngine/vendor/glm"
 IncludeDir["stb_image"] = "RabbitEngine/vendor/stb_image"
 IncludeDir["entt"] = "RabbitEngine/vendor/entt/include"
 IncludeDir["yaml_cpp"] = "RabbitEngine/vendor/yaml-cpp/include"
+IncludeDir["ImGuizmo"] = "RabbitEngine/vendor/ImGuizmo"
 
 
 group "Dependencies"
@@ -62,6 +63,9 @@ project "RabbitEngine"
         "%{prj.name}/vendor/stb_image/**.cpp",
         "%{prj.name}/vendor/glm/glm/**.hpp",
         "%{prj.name}/vendor/glm/glm/**.inl",
+
+        "%{prj.name}/vendor/ImGuizmo/ImGuizmo.h",
+        "%{prj.name}/vendor/ImGuizmo/ImGuizmo.cpp",
     }
 
     defines
@@ -82,7 +86,8 @@ project "RabbitEngine"
         "%{IncludeDir.glm}",
         "%{IncludeDir.stb_image}",
         "%{IncludeDir.entt}",
-        "%{IncludeDir.yaml_cpp}"
+        "%{IncludeDir.yaml_cpp}",
+        "%{IncludeDir.ImGuizmo}"
     }
 
     links
@@ -93,6 +98,9 @@ project "RabbitEngine"
         "yaml-cpp",
         "opengl32.lib"
     }
+
+    filter "files:RabbitEngine/vendor/ImGuizmo/**.cpp"
+    flags { "NoPCH" }
 
     filter "system:windows"				-- 设置针对Windows平台的过滤器
         systemversion "latest"			-- 使用最新版本的系统sdk 比如Windows 10.0
@@ -138,7 +146,8 @@ project "Sandbox"
         "RabbitEngine/src",
         "RabbitEngine/vendor",
         "%{IncludeDir.glm}",
-        "%{IncludeDir.entt}"
+        "%{IncludeDir.entt}",
+        "%{IncludeDir.ImGuizmo}"
     }
 
 -- 设置此项目引用RabbitEngine
@@ -187,7 +196,8 @@ project "Rabbitnut"
         "RabbitEngine/src",
         "RabbitEngine/vendor",
         "%{IncludeDir.glm}",
-        "%{IncludeDir.entt}"
+        "%{IncludeDir.entt}",
+        "%{IncludeDir.ImGuizmo}"
     }
 
 -- 设置此项目引用RabbitEngine

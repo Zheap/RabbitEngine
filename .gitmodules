@@ -13,3 +13,6 @@
 [submodule "RabbitEngine/vendor/yaml-cpp"]
 	path = RabbitEngine/vendor/yaml-cpp
 	url = https://github.com/Zheap/yaml-cpp
+[submodule "RabbitEngine/vendor/ImGuizmo"]
+	path = RabbitEngine/vendor/ImGuizmo
+	url = https://github.com/Zheap/ImGuizmo

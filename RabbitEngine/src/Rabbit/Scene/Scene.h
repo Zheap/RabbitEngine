@@ -3,6 +3,7 @@
 #include "entt.hpp"
 
 #include "Rabbit/Core/Timestep.h"
+#include "Rabbit/Renderer/EditorCamera.h"
 
 namespace Rabbit {
 
@@ -17,7 +18,8 @@ namespace Rabbit {
         Entity CreateEntity(const std::string& name = std::string());
         void DestroyEntity(Entity entity);
 
-        void OnUpdate(Timestep ts);
+        void OnUpdateEditor(Timestep ts, EditorCamera& camera);
+        void OnUpdateRuntime(Timestep ts);
         void OnViewportResize(uint32_t width, uint32_t height);
 
         Entity GetPrimaryCameraEntity();

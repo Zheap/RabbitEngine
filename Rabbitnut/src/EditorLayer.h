@@ -2,6 +2,7 @@
 
 #include "Rabbit.h"
 #include "Panels/SceneHierarchyPanel.h"
+#include "Rabbit/Renderer/EditorCamera.h"
 
 namespace Rabbit {
 
@@ -38,6 +39,8 @@ namespace Rabbit {
         Entity m_SecondCamera;
 
         bool m_PrimaryCamera = true;
+
+        EditorCamera m_EditorCamera;
 
         Ref<Texture2D> m_CheckedboardTexture;
 

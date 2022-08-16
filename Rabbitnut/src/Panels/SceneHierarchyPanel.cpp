@@ -205,7 +205,7 @@ namespace Rabbit {
 
             char buffer[256];
             memset(buffer, 0, sizeof(buffer));
-            strcpy_s(buffer, sizeof(buffer), tag.c_str());
+            std::strncpy(buffer, tag.c_str(), sizeof(buffer));
             if (ImGui::InputText("##Tag", buffer, sizeof(buffer)))
             {
                 tag = std::string(buffer);
@@ -222,13 +222,19 @@ namespace Rabbit {
         {
             if (ImGui::MenuItem("Camera"))
             {
-                m_SelectionContext.AddComponent<CameraComponent>();
+                if (!m_SelectionContext.HasComponent<CameraComponent>())
+                    m_SelectionContext.AddComponent<CameraComponent>();
+                else
+                    RB_CORE_WARN("This entity already has the Camera Component!");
                 ImGui::CloseCurrentPopup();
             }
 
             if (ImGui::MenuItem("Sprite Renderer"))
             {
-                m_SelectionContext.AddComponent<SpriteRendererComponent>();
+                if (!m_SelectionContext.HasComponent<SpriteRendererComponent>())
+                    m_SelectionContext.AddComponent<SpriteRendererComponent>();
+                else
+                    RB_CORE_WARN("This entity already has the Sprite Renderer Component!");
                 ImGui::CloseCurrentPopup();
             }
 

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Rabbit/Core/Core.h"
+#include "Rabbit/Core/KeyCodes.h"
+#
 
 namespace Rabbit {
 

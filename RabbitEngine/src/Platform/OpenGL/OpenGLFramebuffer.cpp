@@ -74,6 +74,17 @@ namespace Rabbit {
             }
             return false;
         }
+
+        static GLenum RabbitFBTextureFormatToGL(FramebufferTextureFormat format)
+        {
+            switch (format)
+            {
+                case Rabbit::FramebufferTextureFormat::RGBA8:
+                    return GL_RGBA8;
+                case Rabbit::FramebufferTextureFormat::RED_INTEGER:
+                    return GL_RED_INTEGER;
+            }
+        }
     }
 
 
@@ -199,6 +210,14 @@ namespace Rabbit {
         int pixelData;
         glReadPixels(x, y, 1, 1, GL_RED_INTEGER, GL_INT, &pixelData);
         return pixelData;
+    }
+
+    void OpenGLFramebuffer::ClearAttachment(uint32_t attachmentIndex, int value)
+    {
+        RB_CORE_ASSERT(attachmentIndex < m_ColorAttachments.size(), "");
+
+        auto& spec = m_ColorAttachmentSpecifications[attachmentIndex];
+        glClearTexImage(m_ColorAttachments[attachmentIndex], 0, Utils::RabbitFBTextureFormatToGL(spec.TextureFormat), GL_INT, &value);
     }
 
 }

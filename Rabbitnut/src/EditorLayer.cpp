@@ -331,6 +331,7 @@ namespace Rabbit {
 
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<KeyPressedEvent>(RB_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
+        dispatcher.Dispatch<MouseButtonPressedEvent>(RB_BIND_EVENT_FN(EditorLayer::OnMouseButtonPressed));
     }
 
 
@@ -390,6 +391,16 @@ namespace Rabbit {
             }
 
         }
+    }
+
+    bool EditorLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
+    {
+        if (e.GetMouseButton() == RB_MOUSE_BUTTON_LEFT)
+        {
+            if (m_ViewportHovered && !ImGuizmo::IsOver() && !Input::IsKeyPressed(RB_KEY_LEFT_ALT))
+                m_SceneHierarchyPanel.SetSelectedEntity(m_HoveredEntity);
+        }
+        return false;
     }
 
     void EditorLayer::NewScene()

@@ -33,7 +33,7 @@ namespace Rabbit {
         glGetIntegerv(GL_MAJOR_VERSION, &versionMajor);
         glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
 
-        RB_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "Hazel requires at least OpenGL version 4.5!");
+        RB_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "RabbitEngine requires at least OpenGL version 4.5!");
 #endif
     }
 

@@ -6,3 +6,7 @@ bin/
 *.vcxproj
 *.filters
 Rabbitnut/imgui.ini
+Sandbox/RabbitProfile-Runtime.json
+Sandbox/RabbitProfile-ShutDown.json
+Sandbox/RabbitProfile-Startup.json
+scripts/__pycache__/

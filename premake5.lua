@@ -12,11 +12,6 @@ workspace "RabbitEngine"
 		"Dist"
 	}
 
-	solution_items
-	{
-		".editorconfig"
-	}
-
 	flags
 	{
 		"MultiProcessorCompile"

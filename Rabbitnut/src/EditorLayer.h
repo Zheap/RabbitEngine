@@ -2,6 +2,7 @@
 
 #include "Rabbit.h"
 #include "Panels/SceneHierarchyPanel.h"
+#include "Panels/ContentBrowserPanel.h"
 #include "Rabbit/Renderer/EditorCamera.h"
 
 namespace Rabbit {
@@ -57,6 +58,7 @@ namespace Rabbit {
 
         // Panels
         SceneHierarchyPanel m_SceneHierarchyPanel;
+        ContentBrowserPanel m_ContentBrowserPanel;
     };
 
 }

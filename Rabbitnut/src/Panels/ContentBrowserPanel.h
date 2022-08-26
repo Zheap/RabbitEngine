@@ -2,6 +2,8 @@
 
 #include <filesystem>
 
+#include "Rabbit/Renderer/Texture.h"
+
 namespace Rabbit {
 
     class ContentBrowserPanel
@@ -12,6 +14,9 @@ namespace Rabbit {
         void OnImGuiRender();
     private:
         std::filesystem::path m_CurrentDirectory;
+
+        Ref<Texture2D> m_DirectoryIcon;
+        Ref<Texture2D> m_FileIcon;
     };
 
 }

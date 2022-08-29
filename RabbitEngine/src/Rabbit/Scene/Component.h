@@ -6,9 +6,9 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
-
 #include "Rabbit/Scene/SceneCamera.h"
 #include "Rabbit/Scene/ScriptableEntity.h"
+#include "Rabbit/Renderer/Texture.h"
 
 namespace Rabbit {
 
@@ -51,6 +51,8 @@ namespace Rabbit {
     struct SpriteRendererComponent
     {
         glm::vec4 Color{ 1.0f, 1.0f, 1.0f, 1.0f };
+        Ref<Texture2D> Texture;
+        float TilingFactor = 1.0f;
 
         SpriteRendererComponent() = default;
         SpriteRendererComponent(const SpriteRendererComponent&) = default;

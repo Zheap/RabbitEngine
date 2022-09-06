@@ -64,7 +64,7 @@ namespace Rabbit {
 
             RB_CORE_ASSERT(m_InternalFormat & m_DataFormat, "Format not supported!")
 
-                glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
+            glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
             glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);  // this GL_RGB8 means how opengl is going to store our texture
 
             glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

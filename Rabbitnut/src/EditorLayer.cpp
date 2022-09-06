@@ -480,15 +480,12 @@ namespace Rabbit {
             RB_WARN("Could not load {0} - not a scene file", path.filename().string());
             return;
         }
+        m_ActiveScene = CreateRef<Scene>();
+        m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+        m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
-        Ref<Scene> newScene = CreateRef<Scene>();
-        SceneSerializer serializer(newScene);
-        if (serializer.Deserialize(path.string()))
-        {
-            m_ActiveScene = newScene;
-            m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-            m_SceneHierarchyPanel.SetContext(m_ActiveScene);
-        }
+        SceneSerializer serializer(m_ActiveScene);
+        serializer.Deserialize(path.string());
     }
 
     void EditorLayer::SaveSceneAs()

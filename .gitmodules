@@ -16,3 +16,6 @@
 [submodule "RabbitEngine/vendor/ImGuizmo"]
 	path = RabbitEngine/vendor/ImGuizmo
 	url = https://github.com/Zheap/ImGuizmo
+[submodule "RabbitEngine/vendor/Box2D"]
+	path = RabbitEngine/vendor/Box2D
+	url = https://github.com/Zheap/box2d

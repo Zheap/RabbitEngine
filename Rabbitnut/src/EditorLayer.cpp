@@ -482,7 +482,7 @@ namespace Rabbit {
         }
 
         Ref<Scene> newScene = CreateRef<Scene>();
-        SceneSerializer serializer(m_ActiveScene);
+        SceneSerializer serializer(newScene);
         if (serializer.Deserialize(path.string()))
         {
             m_ActiveScene = newScene;
@@ -504,10 +504,12 @@ namespace Rabbit {
     void EditorLayer::OnScenePlay()
     {
         m_SceneState = SceneState::Play;
+        m_ActiveScene->OnRuntimeStart();
     }
 
     void EditorLayer::OnSceneStop()
     {
         m_SceneState = SceneState::Edit;
+        m_ActiveScene->OnRuntimeStop();
     }
 }

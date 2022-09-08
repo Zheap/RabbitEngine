@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Scene.h"
+#include "Component.h"
+#include "Rabbit/Core/UUID.h"
+
 #include "entt.hpp"
 
 namespace Rabbit {
@@ -44,6 +47,8 @@ namespace Rabbit {
         operator bool() const { return m_EntityHandle != entt::null; }
         operator entt::entity() const { return m_EntityHandle; }
         operator uint32_t() const { return (uint32_t)m_EntityHandle; }
+
+        UUID GetUUID() { return GetComponent<IDComponent>().ID; }
 
         bool operator==(const Entity& other) const 
         { 

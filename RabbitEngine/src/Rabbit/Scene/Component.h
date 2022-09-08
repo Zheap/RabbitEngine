@@ -1,16 +1,25 @@
 #pragma once
 
+#include "SceneCamera.h"
+#include "Rabbit/Core/UUID.h"
+#include "Rabbit/Renderer/Texture.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
-#include "Rabbit/Scene/SceneCamera.h"
-#include "Rabbit/Scene/ScriptableEntity.h"
-#include "Rabbit/Renderer/Texture.h"
 
 namespace Rabbit {
+
+    struct IDComponent
+    {
+        UUID ID;
+
+        IDComponent() = default;
+        IDComponent(const IDComponent&) = default;
+    };
 
     struct TagComponent
     {
@@ -72,6 +81,8 @@ namespace Rabbit {
         CameraComponent() = default;
         CameraComponent(const CameraComponent&) = default;
     };
+
+    class ScriptableEntity; // forwrad declare
 
     struct NativeScriptComponent
     {

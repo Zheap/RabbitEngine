@@ -1,6 +1,6 @@
 Scene: Untitled
 Entities:
-  - Entity: 12212
+  - Entity: 14850232570706966037
     TagComponent:
       Tag: Camera
     TransformComponent:
@@ -18,12 +18,12 @@ Entities:
         OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: 12212
+  - Entity: 9473348075757260466
     TagComponent:
       Tag: Cube1
     TransformComponent:
       Translation: [0, 0, 0]
-      Rotation: [-0.362268418, -0.127479047, 2.70049143]
+      Rotation: [-0.362268448, -0.127479047, 11.4405193]
       Scale: [0.421322316, 0.400235415, 0.999999642]
     SpriteRendererComponent:
       Color: [1, 1, 1, 1]
@@ -37,7 +37,7 @@ Entities:
       Friction: 0.910000026
       Restitution: 0.769999981
       RestitutionThreshold: 0.5
-  - Entity: 12212
+  - Entity: 5776380920007421989
     TagComponent:
       Tag: Cube2
     TransformComponent:

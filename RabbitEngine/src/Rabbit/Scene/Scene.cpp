@@ -1,6 +1,6 @@
 #include "rbpch.h"
 #include "Scene.h"
-#include "Entity.h"
+#include "ScriptableEntity.h"
 #include "Component.h"
 #include "Rabbit/Renderer/Renderer2D.h"
 
@@ -41,7 +41,13 @@ namespace Rabbit {
 
     Entity Scene::CreateEntity(const std::string& name)
     {
+        return CreateEntityWithUUID(UUID(), name);
+    }
+
+    Rabbit::Entity Scene::CreateEntityWithUUID(UUID uuid, const std::string& name /*= std::string()*/)
+    {
         Entity entity = { m_Registry.create(), this };
+        entity.AddComponent<IDComponent>(uuid);
         entity.AddComponent<TransformComponent>();
         auto& tag = entity.AddComponent<TagComponent>();
         tag.Tag = name.empty() ? "Entity" : name;
@@ -215,7 +221,12 @@ namespace Rabbit {
     template<typename T>
     void Scene::OnComponentAdded(Entity entity, T& component)
     {
-        static_assert(false);
+    }
+
+    template<>
+    void Scene::OnComponentAdded(Entity entity, IDComponent& component)
+    {
+
     }
 
     template<>

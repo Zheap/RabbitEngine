@@ -1,15 +1,6 @@
 Scene: Untitled
 Entities:
-  - Entity: 12212
-    TagComponent:
-      Tag: cube1
-    TransformComponent:
-      Translation: [0, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    SpriteRendererComponent:
-      Color: [1, 1, 1, 1]
-  - Entity: 12212
+  - Entity: 17306535458909473000
     TagComponent:
       Tag: camera
     TransformComponent:
@@ -27,3 +18,12 @@ Entities:
         OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
+  - Entity: 6201518066435521958
+    TagComponent:
+      Tag: cube1
+    TransformComponent:
+      Translation: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    SpriteRendererComponent:
+      Color: [1, 1, 1, 1]

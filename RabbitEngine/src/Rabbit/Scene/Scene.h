@@ -2,6 +2,7 @@
 
 #include "entt.hpp"
 
+#include "Rabbit/Core/UUID.h"
 #include "Rabbit/Core/Timestep.h"
 #include "Rabbit/Renderer/EditorCamera.h"
 
@@ -18,6 +19,8 @@ namespace Rabbit {
         ~Scene();
 
         Entity CreateEntity(const std::string& name = std::string());
+        Entity CreateEntityWithUUID(UUID uuid, const std::string& name = std::string());
+
         void DestroyEntity(Entity entity);
 
         void OnRuntimeStart();

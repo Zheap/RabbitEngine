@@ -18,6 +18,16 @@ Entities:
         OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
+    Rigidbody2DComponent:
+      BodyType: Dynamic
+      FixedRotation: true
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
   - Entity: 9473348075757260466
     TagComponent:
       Tag: Cube1
@@ -41,9 +51,47 @@ Entities:
     TagComponent:
       Tag: Cube2
     TransformComponent:
-      Translation: [0, -2.0999999, 0]
-      Rotation: [0, 0, 0]
-      Scale: [5.1585412, 0.370887041, 1]
+      Translation: [-1.34809053, -4.60834408, 0.166998297]
+      Rotation: [-0.0452102274, -0.167385623, -0.360830128]
+      Scale: [5.15853882, 0.37088722, 0.999973655]
+    SpriteRendererComponent:
+      Color: [0.965250969, 0.141619831, 0.141619831, 1]
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: false
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 802389816287491617
+    TagComponent:
+      Tag: Cube2
+    TransformComponent:
+      Translation: [3.2918334, -2.0999999, 0]
+      Rotation: [0.298336208, 0.188925773, 0.994880855]
+      Scale: [5.15854645, 0.370886505, 1]
+    SpriteRendererComponent:
+      Color: [0.965250969, 0.141619831, 0.141619831, 1]
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: false
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 14059196147945115570
+    TagComponent:
+      Tag: Cube2
+    TransformComponent:
+      Translation: [-1.25651193, -2.00201583, -0.0873694941]
+      Rotation: [-0.0452102274, -0.167385623, -0.360830128]
+      Scale: [5.15853882, 0.37088722, 0.999973655]
     SpriteRendererComponent:
       Color: [0.965250969, 0.141619831, 0.141619831, 1]
     Rigidbody2DComponent:

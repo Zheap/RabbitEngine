@@ -172,6 +172,7 @@ namespace Rabbit {
             {
                 auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
                 Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+                //Renderer2D::DrawRect(transform.GetTransform(), glm::vec4(1.0f), (int)entity);
             }
         }
 
@@ -184,6 +185,9 @@ namespace Rabbit {
                 Renderer2D::DrawCircle(transform.GetTransform(), circle.Color, circle.Thickness, circle.Fade, (int)entity);
             }
         }
+
+        //Renderer2D::DrawLine(glm::vec3(2.0f), glm::vec3(5.0f), glm::vec4(1, 0, 1, 1));
+        //Renderer2D::DrawRect(glm::vec3(0.0f), glm::vec2(1.0f), glm::vec4(1, 1, 1, 1));
 
         Renderer2D::EndScene();
     }

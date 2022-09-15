@@ -45,18 +45,16 @@ uniform sampler2D u_Textures[32];
 void main()
 {
     // Calculate distance and fill circle with white
-    //float distance = 1.0 - length(v_LocalPosition);
-    //float circle = smoothstep(0.0, v_Fade, distance);
-    //circle *= smoothstep(v_Thickness + v_Fade, v_Thickness, distance);
+    float distance = 1.0 - length(v_LocalPosition);
+    float circle = smoothstep(0.0, v_Fade, distance);
+    circle *= smoothstep(v_Thickness + v_Fade, v_Thickness, distance);
 
-    //if (circle == 0.0)
-    //    discard;
+    if (circle == 0.0)
+        discard;
 
     // Set output color
-    //color = v_Color;
-    //color.a *= circle;
-
-    color = vec4(1.0, 1.0, 0.0, 1.0);
+    color = v_Color;
+    color.a *= circle;
 
     color2 = v_EntityID;
 }

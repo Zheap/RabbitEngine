@@ -87,6 +87,7 @@ namespace Rabbit {
         // Copy Components (except IDComponent, TagComponent)
         CopyComponent<TransformComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
         CopyComponent<SpriteRendererComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
+        CopyComponent<CircleRendererComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
         CopyComponent<CameraComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
         CopyComponent<NativeScriptComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
         CopyComponent<Rigidbody2DComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
@@ -164,11 +165,24 @@ namespace Rabbit {
     {
         Renderer2D::BeginScene(camera);
 
-        auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-        for (auto entity : group)
+        // Draw Sprites
         {
-            auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-            Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+            auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+            for (auto entity : group)
+            {
+                auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+                Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+            }
+        }
+
+        // Draw Circles
+        {
+            auto view = m_Registry.view<TransformComponent, CircleRendererComponent>();
+            for (auto entity : view)
+            {
+                auto [transform, circle] = view.get<TransformComponent, CircleRendererComponent>(entity);
+                Renderer2D::DrawCircle(transform.GetTransform(), circle.Color, circle.Thickness, circle.Fade, (int)entity);
+            }
         }
 
         Renderer2D::EndScene();
@@ -234,11 +248,24 @@ namespace Rabbit {
         {
             Renderer2D::BeginScene(*mainCamera, cameraTransform);
 
-            auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-            for (auto entity : group)
+            // Draw Sprites
             {
-                auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-                Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+                auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+                for (auto entity : group)
+                {
+                    auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+                    Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+                }
+            }
+
+            // Draw Circles
+            {
+                auto view = m_Registry.view<TransformComponent, CircleRendererComponent>();
+                for (auto entity : view)
+                {
+                    auto [transform, circle] = view.get<TransformComponent, CircleRendererComponent>(entity);
+                    Renderer2D::DrawCircle(transform.GetTransform(), circle.Color, circle.Thickness, circle.Fade, (int)entity);
+                }
             }
 
             Renderer2D::EndScene();
@@ -269,6 +296,7 @@ namespace Rabbit {
 
         CopyComponentIfExists<TransformComponent>(newEntity, entity);
         CopyComponentIfExists<SpriteRendererComponent>(newEntity, entity);
+        CopyComponentIfExists<CircleRendererComponent>(newEntity, entity);
         CopyComponentIfExists<CameraComponent>(newEntity, entity);
         CopyComponentIfExists<NativeScriptComponent>(newEntity, entity);
         CopyComponentIfExists<Rigidbody2DComponent>(newEntity, entity);
@@ -312,6 +340,12 @@ namespace Rabbit {
 
     template<>
     void Scene::OnComponentAdded(Entity entity, SpriteRendererComponent& component)
+    {
+
+    }
+
+    template<>
+    void Scene::OnComponentAdded(Entity entity, CircleRendererComponent& component)
     {
 
     }

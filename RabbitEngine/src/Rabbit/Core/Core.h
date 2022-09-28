@@ -1,51 +1,11 @@
 #pragma once
 
+#include "Rabbit/Core/PlatformDetection.h"
+
 #include <memory>
 
-// Platform detection using predefined macros
-#ifdef _WIN32
-        /* Windows x64/x86 */
-    #ifdef _WIN64
-        /* Windows x64  */
-        #define RB_PLATFORM_WINDOWS
-    #else
-        /* Windows x86 */
-        #error "x86 Builds are not supported!"
-    #endif
-#elif defined(__APPLE__) || defined(__MACH__)
-    #include <TargetConditionals.h>
-    /* TARGET_OS_MAC exists on all the platforms
-     * so we must check all of them (in this order)
-     * to ensure that we're running on MAC
-     * and not some other Apple platform */
-    #if TARGET_IPHONE_SIMULATOR == 1
-        #error "IOS simulator is not supported!"
-    #elif TARGET_OS_IPHONE == 1
-        #define RB_PLATFORM_IOS
-        #error "IOS is not supported!"
-    #elif TARGET_OS_MAC == 1
-        #define RB_PLATFORM_MACOS
-        #error "MacOS is not supported!"
-    #else
-        #error "Unknown Apple platform!"
-    #endif
-
- /* We also have to check __ANDROID__ before __linux__
-  * since android is based on the linux kernel
-  * it has __linux__ defined */
-#elif defined(__ANDROID__)
-    #define RB_PLATFORM_ANDROID
-    #error "Android is not supported!"
-#elif defined(__linux__)
-    #define RB_PLATFORM_LINUX
-    #error "Linux is not supported!"
-#else
-    /* Unknown compiler/platform */
-    #error "Unknown platform!"
-#endif // End of platform detection
-
 #ifdef RB_DEBUG
-    #ifdef RB_PLATFORM_WINDOWS
+    #if defined(RB_PLATFORM_WINDOWS)
         #define RB_DEBUGBREAK() __debugbreak()
     #elif defined(RB_PLATFORM_LINUX)
         #include <signal.h>
@@ -58,18 +18,12 @@
     #define RB_DEBUGBREAK()
 #endif
 
-#ifdef RB_ENABLE_ASSERTS
-    #define RB_ASSERT(x, ...) { if(!(x)) { RB_ERROR("Assertion Failed: {0}", __VA_ARGS__); RB_DEBUGBREAK(); } }
-    #define RB_CORE_ASSERT(x, ...) { if(!(x)) { RB_ERROR("Assertion Failed: {0}", __VA_ARGS__); RB_DEBUGBREAK(); } }
-#else
-    #define RB_ASSERT(x, ...)
-    #define RB_CORE_ASSERT(x, ...)
-#endif
+#define RB_EXPAND_MACRO(x) x
+#define RB_STRINGIFY_MACRO(x) #x
 
 #define BIT(x) (1 << x)
 
 #define RB_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
-
 
 namespace Rabbit {
 
@@ -88,4 +42,8 @@ namespace Rabbit {
     {
         return std::make_shared<T>(std::forward<Args>(args)...);
     }
+
 }
+
+#include "Rabbit/Core/Log.h"
+#include "Rabbit/Core/Assert.h"

@@ -8,7 +8,10 @@ layout(location = 3) in float a_Thickness;
 layout(location = 4) in float a_Fade;
 layout(location = 5) in int a_EntityID;
 
-uniform mat4 u_ViewProjection;
+layout(std140, binding = 0) uniform Camera
+{
+    mat4 u_ViewProjection;
+};
 
 out vec3 v_LocalPosition;
 out vec4 v_Color;
@@ -29,8 +32,8 @@ void main()
 #type fragment
 #version 450 core
 
-layout(location = 0) out vec4 color;
-layout(location = 1) out int color2;
+layout(location = 0) out vec4 o_Color;
+layout(location = 1) out int o_EntityID;
 
 in vec3 v_LocalPosition;
 in vec4 v_Color;
@@ -53,8 +56,8 @@ void main()
         discard;
 
     // Set output color
-    color = v_Color;
-    color.a *= circle;
+    o_Color = v_Color;
+    o_Color.a *= circle;
 
-    color2 = v_EntityID;
+    o_EntityID = v_EntityID;
 }

@@ -1,83 +1,23 @@
 Scene: Untitled
 Entities:
-  - Entity: 4223673115435936260
+  - Entity: 14850232570706966037
     TagComponent:
-      Tag: Circle
+      Tag: Camera
     TransformComponent:
-      Translation: [1.07194138, -1.87885237, 0]
+      Translation: [0, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
-    CircleRendererComponent:
-      Color: [0.953667939, 0.857591748, 0.150966749, 1]
-      Thickness: 0.375
-      Fade: 0.0260000005
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: false
-    CircleCollider2DComponent:
-      Offset: [0, 0]
-      Radius: 0.5
-      Density: 1
-      Friction: 0.5
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 14059196147945115570
-    TagComponent:
-      Tag: Cube2
-    TransformComponent:
-      Translation: [-1.25651193, -2.00201583, -0.0873694941]
-      Rotation: [-0.0452102274, -0.167385623, -0.360830128]
-      Scale: [5.15853882, 0.37088722, 0.999973655]
-    SpriteRendererComponent:
-      Color: [0.965250969, 0.141619831, 0.141619831, 1]
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: false
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 0.5
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 802389816287491617
-    TagComponent:
-      Tag: Cube2
-    TransformComponent:
-      Translation: [3.2918334, -2.0999999, 0]
-      Rotation: [0.298336208, 0.188925773, 0.994880855]
-      Scale: [5.15854645, 0.370886505, 1]
-    SpriteRendererComponent:
-      Color: [0.965250969, 0.141619831, 0.141619831, 1]
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: false
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 0.5
-      Restitution: 0
-      RestitutionThreshold: 0.5
-  - Entity: 5776380920007421989
-    TagComponent:
-      Tag: Cube2
-    TransformComponent:
-      Translation: [-1.34809053, -4.60834408, 0.166998297]
-      Rotation: [-0.0452102274, -0.167385623, -0.360830128]
-      Scale: [5.15853882, 0.37088722, 0.999973655]
-    SpriteRendererComponent:
-      Color: [0.965250969, 0.141619831, 0.141619831, 1]
-    Rigidbody2DComponent:
-      BodyType: Static
-      FixedRotation: false
-    BoxCollider2DComponent:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 0.5
-      Restitution: 0
-      RestitutionThreshold: 0.5
+    CameraComponent:
+      Camera:
+        ProjectionType: 1
+        PerspectiveFOV: 0.785398185
+        PerspectiveNear: 0.00999999978
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
   - Entity: 9473348075757260466
     TagComponent:
       Tag: Cube1
@@ -97,30 +37,80 @@ Entities:
       Friction: 0.910000026
       Restitution: 0.769999981
       RestitutionThreshold: 0.5
-  - Entity: 14850232570706966037
+  - Entity: 5776380920007421989
     TagComponent:
-      Tag: Camera
+      Tag: Cube2
     TransformComponent:
-      Translation: [0, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    CameraComponent:
-      Camera:
-        ProjectionType: 1
-        PerspectiveFOV: 0.785398185
-        PerspectiveNear: 0.00999999978
-        PerspectiveFar: 1000
-        OrthographicSize: 10
-        OrthographicNear: -1
-        OrthographicFar: 1
-      Primary: true
-      FixedAspectRatio: false
+      Translation: [-1.34809053, -4.60834408, 0.166998297]
+      Rotation: [0, -1.86264515e-09, -0.360830545]
+      Scale: [5.15853882, 0.370887548, 0.999971688]
+    SpriteRendererComponent:
+      Color: [0.965250969, 0.141619831, 0.141619831, 1]
     Rigidbody2DComponent:
-      BodyType: Dynamic
-      FixedRotation: true
+      BodyType: Static
+      FixedRotation: false
     BoxCollider2DComponent:
       Offset: [0, 0]
       Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 802389816287491617
+    TagComponent:
+      Tag: Cube2
+    TransformComponent:
+      Translation: [3.2918334, -2.0999999, 0]
+      Rotation: [-8.8817842e-16, -7.45058149e-09, 0.905246139]
+      Scale: [5.15853977, 0.370886505, 1]
+    SpriteRendererComponent:
+      Color: [0.965250969, 0.141619831, 0.141619831, 1]
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: false
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 14059196147945115570
+    TagComponent:
+      Tag: Cube2
+    TransformComponent:
+      Translation: [-1.25651193, -2.00201583, -0.0873694941]
+      Rotation: [0, 1.58324838e-08, -0.353802413]
+      Scale: [5.15853739, 0.37088722, 0.99998045]
+    SpriteRendererComponent:
+      Color: [0.965250969, 0.141619831, 0.141619831, 1]
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: false
+    BoxCollider2DComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+  - Entity: 4223673115435936260
+    TagComponent:
+      Tag: Circle
+    TransformComponent:
+      Translation: [1.07194138, -1.87885237, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CircleRendererComponent:
+      Color: [0.953667939, 0.857591748, 0.150966749, 1]
+      Thickness: 0.375
+      Fade: 0.0260000005
+    Rigidbody2DComponent:
+      BodyType: Static
+      FixedRotation: false
+    CircleCollider2DComponent:
+      Offset: [0, 0]
+      Radius: 0.5
       Density: 1
       Friction: 0.5
       Restitution: 0

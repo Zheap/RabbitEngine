@@ -3,34 +3,14 @@ Design custom game engine
 
 
 
-# Multiple gits push -f method
-ssh-agent bash
+## How to build
 
-ssh-add ~/.ssh/id_rsa
-
-ssh-add ~/.ssh/id_rsa_github
-
-ssh-add -l
-
-ssh -T git@githu.com
-
-git push -f
+1. Download **premake5** （https://github.com/premake/premake-core/releases），put it into **RabbitEngine\vendor\premake\bin**
+2. Download **vulkan sdk** （https://vulkan.lunarg.com/sdk/home#windows）, chooese **Debuggable Shader API Libraries-64-bit** option when installing
+3. Run RabbitEngine\scripts\Setup.bat
 
 
 
-# 多git配置
+## Screenshots
 
-#github user
-
-Host github.com
-    Hostname github.com
-    User xxx
-    IdentityFile C:\Users\aaa\.ssh\id_rsa_github   // windows下需要用绝对地址
-    PreferredAuthentications publickey
-
-#gitlab user
-Host gitlab.com
-    Hostname gitlab.com
-    User xxx
-    IdentityFile C:\Users\aaa\.ssh\id_rsa
-    PreferredAuthentications publickey
+​	![ScreenShot](images/ScreenShot.png)
